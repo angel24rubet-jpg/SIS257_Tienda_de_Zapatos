@@ -8,61 +8,61 @@ onMounted(() => {
 const blogPosts = [
   {
     id: 1,
-    title: 'El Arte del Minimalismo en el Armario Moderno',
+    title: 'Las Mejores Zapatillas para Estilo Urbano',
     date: '15 de Octubre, 2024',
-    category: 'Tendencias',
+    category: 'Zapatillas',
     image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80',
-    excerpt: 'Descubre cómo crear un guardarropa versátil con piezas esenciales que trascienden las temporadas y definen tu estilo personal.'
+    excerpt: 'Descubre cómo elegir las zapatillas perfectas para un look casual y con personalidad en la ciudad.'
   },
   {
     id: 2,
-    title: 'Guía Completa: Cómo Combinar Texturas y Tonos Neutros',
+    title: 'Cómo Combinar Zapatillas con Ropa Minimalista',
     date: '8 de Octubre, 2024',
     category: 'Estilo',
     image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80',
-    excerpt: 'La elegancia está en los detalles. Aprende a mezclar diferentes texturas manteniendo una paleta de colores sofisticada.'
+    excerpt: 'Aprende a crear outfits modernos y cómodos usando zapatillas blancas, negras y tonos neutros.'
   },
   {
     id: 3,
-    title: 'Sostenibilidad: El Futuro de la Moda de Lujo',
+    title: 'Zapatillas Sostenibles: Moda Responsable para tus Pies',
     date: '1 de Octubre, 2024',
     category: 'Sostenibilidad',
     image: 'https://images.unsplash.com/photo-1558769132-cb1aea1f1d94?w=800&q=80',
-    excerpt: 'Explora cómo las marcas premium están redefiniendo el lujo con prácticas conscientes y materiales sostenibles.'
+    excerpt: 'Conoce marcas que fabrican zapatillas con materiales reciclados y procesos respetuosos con el medio ambiente.'
   },
   {
     id: 4,
-    title: 'Piezas de Inversión: Qué Buscar en Ropa de Calidad',
+    title: 'Guía de Compra: Qué Buscar en unas Zapatillas de Calidad',
     date: '24 de Septiembre, 2024',
     category: 'Guías',
     image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&q=80',
-    excerpt: 'No todas las prendas son iguales. Descubre los indicadores de calidad que hacen que una pieza valga la pena.'
+    excerpt: 'Aprende a identificar la suela, el material y el ajuste ideal para zapatillas duraderas y cómodas.'
   },
   {
     id: 5,
-    title: 'El Poder del Negro: Construyendo un Look Atemporal',
+    title: 'Top 5 Zapatillas para Versatilidad Diaria',
     date: '17 de Septiembre, 2024',
     category: 'Inspiración',
     image: 'https://images.unsplash.com/photo-1495385794356-15371f348c31?w=800&q=80',
-    excerpt: 'Explora la versatilidad del negro en la moda contemporánea y cómo crear looks sofisticados con esta paleta monocromática.'
+    excerpt: 'Inspírate con modelos que funcionan igual de bien para la calle, la oficina casual y el fin de semana.'
   },
   {
     id: 6,
-    title: 'Transición de Temporada: Del Verano al Otoño',
+    title: 'Zapatillas de Temporada: Lo Último en Tendencias',
     date: '10 de Septiembre, 2024',
     category: 'Tendencias',
     image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80',
-    excerpt: 'Adapta tu guardarropa a los cambios climáticos sin sacrificar estilo. Tips de layering y piezas clave para la transición.'
+    excerpt: 'Descubre los estilos de zapatillas que están dominando el streetwear y las pasarelas actuales.'
   }
 ]
 
 const featuredPost = {
   id: 1,
-  title: 'La Nueva Era del Minimalismo Escandinavo',
+  title: 'Zapatillas que Definen el Estilo Urbano',
   date: '22 de Octubre, 2024',
   category: 'Editorial',
   image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=80',
-  excerpt: 'Una exploración profunda sobre cómo el diseño nórdico continúa influenciando la moda global y redefiniendo el concepto de lujo accesible en 2024.'
+  excerpt: 'Una guía completa para elegir zapatillas que combinen comodidad, diseño y actitud en cada paso.'
 }
 </script>
 
@@ -72,10 +72,10 @@ const featuredPost = {
     <section class="hero-section">
       <div class="hero-container">
         <div class="hero-content">
-          <h1 class="hero-title">Blog de Moda</h1>
+          <h1 class="hero-title">Blog de Zapatillas</h1>
           <div class="hero-divider"></div>
           <p class="hero-subtitle">
-            Inspiración, tendencias y consejos de estilo para el guardarropa contemporáneo
+            Inspiración, tendencias y consejos sobre zapatillas para completar tu estilo urbano
           </p>
         </div>
       </div>
@@ -150,9 +150,9 @@ const featuredPost = {
             Recibe las últimas tendencias, consejos de estilo y ofertas exclusivas directamente en tu correo
           </p>
           <form class="newsletter-form">
-            <input 
-              type="email" 
-              placeholder="Tu correo electrónico" 
+            <input
+              type="email"
+              placeholder="Tu correo electrónico"
               class="newsletter-input"
               required
             />
@@ -519,20 +519,20 @@ const featuredPost = {
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .featured-image {
     height: 400px;
     margin-bottom: 40px;
   }
-  
+
   .featured-content {
     padding: 0;
   }
-  
+
   .featured-title {
     font-size: 1.75rem;
   }
-  
+
   .card-image {
     height: 300px;
   }
@@ -542,27 +542,27 @@ const featuredPost = {
   .hero-section {
     padding: 80px 0 60px 0;
   }
-  
+
   .hero-title {
     font-size: 1.75rem;
     letter-spacing: 2px;
   }
-  
+
   .featured-section,
   .blog-section,
   .newsletter-section {
     padding: 60px 0;
   }
-  
+
   .section-title,
   .newsletter-title {
     font-size: 1.5rem;
   }
-  
+
   .newsletter-form {
     flex-direction: column;
   }
-  
+
   .btn-newsletter {
     width: 100%;
   }

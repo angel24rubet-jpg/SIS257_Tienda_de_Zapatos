@@ -32,10 +32,10 @@ const isLoggedIn = computed(() => !!authStore.token)
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container-fluid px-5">
       <RouterLink to="/" class="navbar-brand">
-        <span class="brand-text">ROMA</span>
+        <span class="brand-text">RAMOS</span>
       </RouterLink>
 
       <button
@@ -53,13 +53,10 @@ const isLoggedIn = computed(() => !!authStore.token)
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <RouterLink to="/" class="nav-link">Inicio</RouterLink>
+            <RouterLink to="/" class="nav-link">INICIO</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/about" class="nav-link">Sobre Nosotros</RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink to="/blog" class="nav-link">Blog</RouterLink>
+            <RouterLink to="/about" class="nav-link">TIENDA RAMOS HISTORIA</RouterLink>
           </li>
           <!-- Mis Pedidos solo visible para usuarios logueados -->
           <li v-if="isLoggedIn" class="nav-item">
@@ -102,9 +99,11 @@ const isLoggedIn = computed(() => !!authStore.token)
 /* Estilo editorial premium */
 
 .navbar {
-  border-bottom: 1px solid #e5e5e5;
+  /* Usar el mismo gradiente que la página para continuidad visual */
+  border-bottom: none;
   padding: 0;
-  background: #ffffff !important;
+  background: linear-gradient(180deg, #eaf6ff 0%, #c2d8ff 100%) !important;
+  box-shadow: 0 1px 0 rgba(11,53,80,0.06);
   transition: all 0.3s ease;
 }
 
@@ -119,10 +118,10 @@ const isLoggedIn = computed(() => !!authStore.token)
 }
 
 .brand-text {
-  font-size: 1.125rem;
-  font-weight: 400;
+  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: 2px;
-  color: #000000;
+  color: #0b3550;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   transition: opacity 0.2s ease;
 }
@@ -132,21 +131,21 @@ const isLoggedIn = computed(() => !!authStore.token)
 }
 
 .nav-link {
-  color: #666666;
-  font-size: 0.875rem;
-  font-weight: 400;
+  color: #0b3550;
+  font-size: 1rem;
+  font-weight: 500;
   letter-spacing: 0.5px;
-  padding: 8px 20px !important;
+  padding: 10px 22px !important;
   transition: color 0.2s ease;
   position: relative;
 }
 
 .nav-link:hover {
-  color: #000000;
+  color: #062430;
 }
 
 .nav-link.router-link-active {
-  color: #000000;
+  color: #062430;
 }
 
 .nav-link.router-link-active::after {
@@ -155,8 +154,8 @@ const isLoggedIn = computed(() => !!authStore.token)
   bottom: 0;
   left: 20px;
   right: 20px;
-  height: 1px;
-  background: #000000;
+  height: 2px;
+  background: #062430;
 }
 
 .navbar-actions {
@@ -171,7 +170,7 @@ const isLoggedIn = computed(() => !!authStore.token)
   border: none;
   padding: 10px 16px;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-decoration: none;
@@ -187,15 +186,16 @@ const isLoggedIn = computed(() => !!authStore.token)
 
 .btn-register {
   background: transparent;
-  color: #000000;
-  border: 1px solid #000000;
+  color: #0b3550;
+  border: 1px solid rgba(11,53,80,0.12);
   padding: 8px 20px;
   text-decoration: none;
+  font-weight: 600;
 }
 
 .btn-logout {
   background: transparent;
-  color: #000000;
+  color: #0b3550;
   border: 1px solid transparent;
   padding: 8px 18px;
   cursor: pointer;
@@ -203,34 +203,35 @@ const isLoggedIn = computed(() => !!authStore.token)
 
 .btn-logout:hover {
   color: #ffffff;
-  background: #000000;
+  background: #0b3550;
 }
 
 .btn-login {
-  background: #000000;
+  background: #0b3550;
   color: #ffffff;
-  border: none;
-  padding: 10px 28px;
-  font-size: 0.875rem;
-  font-weight: 400;
+  border: 1px solid transparent;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-decoration: none;
   transition: all 0.2s ease;
   display: inline-block;
+  border-radius: 4px;
 }
 
 .btn-login:hover {
-  background: #333333;
+  background: #062430;
   color: #ffffff;
 }
 
 .btn-panel {
   background: transparent;
-  color: #000000;
-  border: 1px solid #e5e5e5;
-  padding: 10px 28px;
-  font-size: 0.875rem;
-  font-weight: 400;
+  color: #0b3550;
+  border: 1px solid rgba(11,53,80,0.12);
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -238,9 +239,9 @@ const isLoggedIn = computed(() => !!authStore.token)
 }
 
 .btn-panel:hover {
-  background: #000000;
+  background: #0b3550;
   color: #ffffff;
-  border-color: #000000;
+  border-color: rgba(11,53,80,0.12);
 }
 
 .navbar-toggler {

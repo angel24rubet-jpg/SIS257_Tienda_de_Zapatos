@@ -160,9 +160,9 @@ function switchToLogin() {
     <div class="auth-container">
       <!-- Panel izquierdo - Branding -->
       <div class="brand-panel">
-        <div class="brand-content">
-          <div class="brand-logo">ROMA</div>
-          <div class="brand-tagline">Elegancia en cada detalle</div>
+          <div class="brand-content">
+          <div class="brand-logo">RAMOS</div>
+          <div class="brand-tagline">Tienda de Zapatos</div>
           <div class="brand-divider"></div>
           <p class="brand-description">
             Accede a tu cuenta para disfrutar de una experiencia de compra exclusiva
@@ -356,7 +356,8 @@ function switchToLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0a0a0a;
+  /* Gradiente celeste pastel, igual que el resto del sitio */
+  background: linear-gradient(180deg, #eaf6ff 0%, #c2d8ff 100%);
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -371,9 +372,10 @@ function switchToLogin() {
 .pattern {
   position: absolute;
   inset: 0;
+  /* patrón muy sutil para dar textura al fondo claro */
   background-image:
-    radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255,255,255,0.02) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(11,53,80,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(11,53,80,0.02) 0%, transparent 50%);
 }
 
 .auth-container {
@@ -381,8 +383,8 @@ function switchToLogin() {
   width: 100%;
   max-width: 1000px;
   max-height: 90vh;
-  background: #fff;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  /* contenedor transparente para que se vea el gradiente global */
+  background: transparent;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -390,24 +392,27 @@ function switchToLogin() {
 
 /* Brand Panel */
 .brand-panel {
-  flex: 0 0 380px;
-  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-  padding: 60px 50px;
+  flex: 0 0 360px;
+  /* panel izquierdo más claro, transparente sobre el gradiente */
+  background: rgba(255,255,255,0.06);
+  padding: 50px 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(4px);
+  border-right: 1px solid rgba(11,53,80,0.06);
 }
 
 .brand-panel::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  top: -40%;
+  right: -40%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(11,53,80,0.03) 0%, transparent 70%);
 }
 
 .brand-content {
@@ -416,32 +421,32 @@ function switchToLogin() {
 }
 
 .brand-logo {
-  font-size: 2.5rem;
-  font-weight: 200;
-  letter-spacing: 12px;
-  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 8px;
+  color: #0b3550;
   margin-bottom: 8px;
 }
 
 .brand-tagline {
   font-size: 0.85rem;
   letter-spacing: 3px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(11,53,80,0.6);
   text-transform: uppercase;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .brand-divider {
   width: 40px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent);
-  margin-bottom: 30px;
+  background: linear-gradient(90deg, rgba(11,53,80,0.25), transparent);
+  margin-bottom: 20px;
 }
 
 .brand-description {
   font-size: 1rem;
   line-height: 1.8;
-  color: rgba(255,255,255,0.6);
+  color: rgba(11,53,80,0.7);
   font-weight: 300;
 }
 
@@ -451,7 +456,7 @@ function switchToLogin() {
   gap: 12px;
   font-size: 0.75rem;
   letter-spacing: 2px;
-  color: rgba(255,255,255,0.3);
+  color: rgba(11,53,80,0.45);
   text-transform: uppercase;
 }
 
@@ -465,7 +470,10 @@ function switchToLogin() {
   padding: 30px 40px;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  /* Tarjeta clara sobre el gradiente */
+  background: rgba(255,255,255,0.98);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(11,53,80,0.08);
   overflow-y: auto;
   max-height: 90vh;
 }
@@ -484,15 +492,15 @@ function switchToLogin() {
 
 .form-header h1 {
   font-size: 1.5rem;
-  font-weight: 300;
-  color: #1a1a1a;
+  font-weight: 600;
+  color: #0b3550;
   margin: 0 0 8px 0;
   letter-spacing: -0.5px;
 }
 
 .form-header p {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 0.95rem;
+  color: #556b7a;
   margin: 0;
 }
 
@@ -564,13 +572,14 @@ function switchToLogin() {
 .input-group input,
 .input-group select {
   width: 100%;
-  height: 42px;
+  height: 44px;
   padding: 0 12px;
-  border: 1px solid #e5e5e5;
-  background: #fafafa;
-  font-size: 0.9rem;
-  color: #1a1a1a;
+  border: 1px solid #e6eef6;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #0b3550;
   transition: all 0.3s ease;
+  border-radius: 4px;
 }
 
 .input-group select {
@@ -593,11 +602,12 @@ function switchToLogin() {
 }
 
 .error-message {
-  padding: 14px 18px;
-  background: #fafafa;
-  border-left: 2px solid #1a1a1a;
-  font-size: 0.85rem;
-  color: #666;
+  padding: 12px 14px;
+  background: #fff3f3;
+  border-left: 3px solid #ff6b6b;
+  font-size: 0.9rem;
+  color: #b44;
+  border-radius: 4px;
 }
 
 .btn-back {
@@ -615,14 +625,26 @@ function switchToLogin() {
   transition: all 0.2s ease;
   z-index: 5;
 }
+.btn-primary {
+  background: #0b3550;
+  color: #ffffff;
+  border: 1px solid transparent;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #333 0%, #555 100%);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background: #062430;
+  box-shadow: 0 8px 24px rgba(6,36,48,0.12);
   transform: translateY(-2px);
 }
 
 .btn-primary:disabled {
-  background: #ccc;
+  background: #cbd6dd;
   cursor: not-allowed;
 }
 

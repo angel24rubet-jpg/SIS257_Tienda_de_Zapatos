@@ -14,7 +14,7 @@ onMounted(async () => {
     router.push('/')
     return
   }
-  
+
   // Pre-llenar datos del cliente si ya está logueado
   await cargarDatosCliente()
 })
@@ -27,7 +27,7 @@ const cargarDatosCliente = async () => {
       preLlenarFormulario(authStore.cliente)
       return
     }
-    
+
     // Si no está en el store, obtener del backend
     const { data } = await http.get('clientes/me')
     if (data) {
@@ -46,7 +46,7 @@ const preLlenarFormulario = (cliente: any) => {
   if (cliente.nombre) formCliente.value.nombre = cliente.nombre
   if (cliente.apellido) formCliente.value.apellido = cliente.apellido
   if (cliente.telefono) formCliente.value.telefono = cliente.telefono
-  
+
   // La dirección puede venir como string completo o necesitar separarse
   if (cliente.direccion) {
     // Si la dirección contiene coma, intentar separar ciudad
@@ -56,7 +56,7 @@ const preLlenarFormulario = (cliente: any) => {
       formCliente.value.ciudad = partes[1] || ''
     }
   }
-  
+
 
 }
 
@@ -285,10 +285,10 @@ const volverInicio = () => {
 const imprimirComprobante = () => {
   const comprobante = document.getElementById('comprobante-pago')
   if (!comprobante) return
-  
+
   const ventanaImpresion = window.open('', '_blank')
   if (!ventanaImpresion) return
-  
+
   ventanaImpresion.document.write(`
     <!DOCTYPE html>
     <html>
@@ -333,7 +333,7 @@ const imprimirComprobante = () => {
   <div class="checkout-page">
     <!-- Minimal Header -->
     <header class="checkout-minimal-header">
-      <router-link to="/" class="checkout-logo">MAJESTIC</router-link>
+      <router-link to="/" class="checkout-logo">RAMOS</router-link>
     </header>
 
     <div class="checkout-container">
@@ -363,7 +363,7 @@ const imprimirComprobante = () => {
         <!-- Paso 1: Datos de Envío -->
         <div v-if="pasoActual === 1" class="checkout-step">
           <h2 class="step-title">Información de Envío</h2>
-          
+
           <!-- Aviso de datos pre-llenados -->
           <div v-if="authStore.cliente" class="prefilled-notice">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -582,10 +582,10 @@ const imprimirComprobante = () => {
           <!-- Comprobante de Pago -->
           <div class="comprobante" id="comprobante-pago">
             <div class="comprobante-header">
-              <div class="comprobante-logo">MAJESTIC</div>
+              <div class="comprobante-logo">RAMOS</div>
               <div class="comprobante-tipo">COMPROBANTE DE PAGO</div>
             </div>
-            
+
             <div class="comprobante-info">
               <div class="comprobante-row">
                 <span>Número de Pedido:</span>
@@ -716,8 +716,8 @@ const imprimirComprobante = () => {
   top: 0;
   left: 0;
   right: 0;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
+  background: #eaf5ff;
+  border-bottom: 1px solid #dbeaf9;
   padding: 20px 40px;
   z-index: 1000;
   display: flex;
@@ -726,20 +726,20 @@ const imprimirComprobante = () => {
 
 .checkout-logo {
   font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: 1px;
   color: #000000;
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
 
 .checkout-logo:hover {
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .checkout-page {
   min-height: 100vh;
-  background: #fafafa;
+  background: #f4f5f7;
   padding: 100px 20px 60px 20px;
 }
 
@@ -833,9 +833,11 @@ const imprimirComprobante = () => {
 }
 
 .checkout-step {
-  background: #ffffff;
+  background: #eaf5ff;
   padding: 40px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #dbeaf9;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.05);
 }
 
 .step-title {
@@ -898,8 +900,8 @@ const imprimirComprobante = () => {
 
 .form-input {
   padding: 14px 16px;
-  border: 1px solid #e5e5e5;
-  background: #ffffff;
+  border: 1px solid #dbeaf9;
+  background: #f4fbff;
   font-size: 0.9375rem;
   color: #000000;
   transition: border-color 0.2s ease;
@@ -945,8 +947,8 @@ const imprimirComprobante = () => {
   align-items: center;
   gap: 12px;
   padding: 16px;
-  border: 1px solid #e5e5e5;
-  background: #ffffff;
+  border: 1px solid #dbeaf9;
+  background: #f4fbff;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -1054,8 +1056,8 @@ const imprimirComprobante = () => {
 
 /* Comprobante de Pago */
 .comprobante {
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
+  background: #eaf5ff;
+  border: 1px solid #dbeaf9;
   padding: 40px;
   margin: 30px auto;
   max-width: 600px;
@@ -1194,12 +1196,11 @@ const imprimirComprobante = () => {
 
 /* Order Summary Sidebar */
 .order-summary {
-  background: #ffffff;
+  background: #eaf5ff;
   padding: 30px;
-  border: 1px solid #e5e5e5;
-  height: fit-content;
-  position: sticky;
-  top: 100px;
+  border: 1px solid #dbeaf9;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.05);
 }
 
 .summary-title {
@@ -1410,9 +1411,9 @@ const imprimirComprobante = () => {
 .qr-image {
   width: 200px;
   height: 200px;
-  border: 2px solid #e5e5e5;
+  border: 2px solid #dbeaf9;
   padding: 10px;
-  background: #ffffff;
+  background: #f4fbff;
 }
 
 .qr-instruction {

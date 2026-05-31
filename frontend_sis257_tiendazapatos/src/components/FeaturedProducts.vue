@@ -1,6 +1,6 @@
 <template>
     <!-- Featured Products Section -->
-    <section class="py-7">
+    <section class="featured-section py-7">
       <div class="container">
         <div class="row g-4">
         </div>
@@ -12,6 +12,10 @@
 </script>
 
 <style scoped>
+.featured-section {
+  background: #d4e4ff;
+}
+
 .card-span {
   transition: transform 0.3s ease;
 }

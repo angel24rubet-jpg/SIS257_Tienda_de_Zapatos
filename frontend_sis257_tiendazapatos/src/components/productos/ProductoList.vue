@@ -14,7 +14,7 @@ const imagenHover = ref<{ src: string; nombre: string } | null>(null)
 const productosFiltrados = computed(() => {
   if (!busqueda.value.trim()) return productos.value
   const termino = busqueda.value.toLowerCase().trim()
-  return productos.value.filter(prod => 
+  return productos.value.filter(prod =>
     prod.nombre.toLowerCase().includes(termino) ||
     prod.categoria?.nombre?.toLowerCase().includes(termino) ||
     prod.genero?.toLowerCase().includes(termino) ||
@@ -84,14 +84,14 @@ const getGeneroClass = (genero: string) => {
 // Función para formatear tallas (ahora acepta array o string)
 const formatTallas = (tallas: string[] | string | undefined) => {
   if (!tallas) return { visible: [], extra: 0 }
-  
+
   let tallasArray: string[]
   if (Array.isArray(tallas)) {
     tallasArray = tallas
   } else {
     tallasArray = tallas.split(',').map(t => t.trim()).filter(t => t)
   }
-  
+
   const maxVisible = 3 // Mostrar máximo 3 tallas
   return {
     visible: tallasArray.slice(0, maxVisible),
@@ -104,7 +104,7 @@ const formatColores = (colores: any[] | undefined) => {
   if (!colores || !Array.isArray(colores) || colores.length === 0) {
     return { visible: [], extra: 0 }
   }
-  
+
   const maxVisible = 3 // Mostrar máximo 3 colores
   return {
     visible: colores.slice(0, maxVisible),
@@ -153,10 +153,10 @@ const cerrarImagenGrande = () => {
           <circle cx="11" cy="11" r="8"/>
           <path d="m21 21-4.35-4.35"/>
         </svg>
-        <input 
+        <input
           v-model="busqueda"
-          type="text" 
-          class="search-input" 
+          type="text"
+          class="search-input"
           placeholder="Buscar producto, categoría, género..."
         />
         <button v-if="busqueda" @click="busqueda = ''" class="search-clear">
@@ -185,12 +185,12 @@ const cerrarImagenGrande = () => {
         <tbody>
           <tr v-for="producto in productosFiltrados" :key="producto.id">
             <td>
-              <div 
+              <div
                 class="product-thumb-wrapper"
                 @click="mostrarImagenGrande(producto)"
               >
-                <img 
-                  :src="producto.imagenes || '/placeholder.jpg'" 
+                <img
+                  :src="producto.imagenes || '/placeholder.jpg'"
                   :alt="producto.nombre"
                   class="product-thumb"
                 />
@@ -229,15 +229,15 @@ const cerrarImagenGrande = () => {
             </td>
             <td>
               <div class="tallas-container" v-if="formatTallas(producto.tallas).visible.length > 0">
-                <span 
-                  v-for="t in formatTallas(producto.tallas).visible" 
-                  :key="t" 
+                <span
+                  v-for="t in formatTallas(producto.tallas).visible"
+                  :key="t"
                   class="talla-chip"
                 >
                   {{ t }}
                 </span>
-                <span 
-                  v-if="formatTallas(producto.tallas).extra > 0" 
+                <span
+                  v-if="formatTallas(producto.tallas).extra > 0"
                   class="talla-more"
                   :title="`${formatTallas(producto.tallas).extra} tallas más`"
                 >
@@ -248,15 +248,15 @@ const cerrarImagenGrande = () => {
             </td>
             <td>
               <div class="colores-container" v-if="formatColores(producto.colores).visible.length > 0">
-                <div 
-                  v-for="color in formatColores(producto.colores).visible" 
-                  :key="color.id" 
+                <div
+                  v-for="color in formatColores(producto.colores).visible"
+                  :key="color.id"
                   class="color-indicator"
                   :style="{ background: color.codigoHex || '#ccc' }"
                   :title="color.nombre"
                 ></div>
-                <span 
-                  v-if="formatColores(producto.colores).extra > 0" 
+                <span
+                  v-if="formatColores(producto.colores).extra > 0"
                   class="color-more"
                   :title="`${formatColores(producto.colores).extra} colores más`"
                 >
@@ -304,7 +304,7 @@ const cerrarImagenGrande = () => {
           </tr>
         </tbody>
       </table>
-      
+
       <!-- Contador de registros -->
       <div class="table-footer">
         <span class="records-count">
@@ -331,8 +331,8 @@ const cerrarImagenGrande = () => {
             </svg>
           </button>
           <div class="image-modal-content" @click.stop>
-            <img 
-              :src="imagenHover.src" 
+            <img
+              :src="imagenHover.src"
               :alt="imagenHover.nombre"
               class="image-modal-img"
             />
@@ -346,30 +346,35 @@ const cerrarImagenGrande = () => {
 
 <style scoped>
 .list-container {
-  background: #ffffff;
+  background: linear-gradient(180deg, rgba(235, 246, 255, 0.98), rgba(221, 236, 255, 0.9));
   min-height: calc(100vh - 140px);
+  padding: 26px 28px 32px;
 }
 
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 30px 0;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 0;
+  padding: 28px 30px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 50px rgba(32, 86, 171, 0.09);
+  border: 1px solid rgba(94, 129, 255, 0.14);
+  gap: 24px;
+  margin-bottom: 22px;
 }
 
 .page-title {
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  color: #000000;
-  margin-bottom: 8px;
+  font-size: 2.05rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: #13315f;
+  margin-bottom: 10px;
 }
 
 .page-subtitle {
-  font-size: 0.875rem;
-  color: #666666;
+  font-size: 0.95rem;
+  color: #4c6c8c;
   letter-spacing: 0.3px;
   margin: 0;
 }
@@ -377,24 +382,24 @@ const cerrarImagenGrande = () => {
 .btn-action {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
-  color: #ffffff;
+  gap: 10px;
+  background: linear-gradient(135deg, #9ac5ff 0%, #7198ff 100%);
+  color: #0e2f68;
   border: none;
-  padding: 12px 28px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+  padding: 14px 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(81, 111, 229, 0.18);
 }
 
 .btn-action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, #333333 0%, #555555 100%);
+  box-shadow: 0 16px 34px rgba(56, 98, 212, 0.24);
+  background: linear-gradient(135deg, #80a8ff 0%, #5178ed 100%);
 }
 
 .btn-action svg {
@@ -407,70 +412,75 @@ const cerrarImagenGrande = () => {
 
 /* Search Bar */
 .search-bar {
-  padding: 20px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 22px 0 20px;
 }
 
 .search-input-wrapper {
   position: relative;
-  max-width: 400px;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(94, 129, 255, 0.18);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
+  color: #7b8ca7;
   pointer-events: none;
 }
 
 .search-input {
   width: 100%;
-  height: 44px;
-  padding: 0 40px 0 44px;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: #333;
-  background: #fafafa;
+  height: 48px;
+  padding: 0 42px 0 48px;
+  border: none;
+  font-size: 0.95rem;
+  color: #25324d;
+  background: transparent;
   transition: all 0.2s ease;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #000;
-  background: #fff;
+  box-shadow: 0 0 0 4px rgba(93, 146, 255, 0.12);
 }
 
 .search-input::placeholder {
-  color: #aaa;
+  color: #98a6bf;
 }
 
 .search-clear {
   position: absolute;
-  right: 8px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: rgba(94, 129, 255, 0.1);
   border: none;
-  color: #999;
+  color: #3859a1;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .search-clear:hover {
-  color: #333;
+  background: rgba(94, 129, 255, 0.18);
+  color: #1f3d7d;
 }
 
 .table-wrapper {
   overflow-x: auto;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(94, 129, 255, 0.14);
+  box-shadow: 0 22px 50px rgba(32, 86, 171, 0.08);
 }
 
 .data-table {
@@ -480,34 +490,34 @@ const cerrarImagenGrande = () => {
 }
 
 .data-table thead {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, rgba(219, 233, 255, 0.98), rgba(200, 222, 255, 0.98));
 }
 
 .data-table th {
-  padding: 16px 12px;
+  padding: 18px 22px;
   text-align: left;
-  font-weight: 600;
-  font-size: 0.7rem;
-  color: #495057;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #3b5374;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 2px solid #dee2e6;
+  border-bottom: 1px solid rgba(32, 86, 171, 0.1);
 }
 
 .data-table tbody tr {
-  border-bottom: 1px solid #f0f0f0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-bottom: 1px solid rgba(32, 86, 171, 0.08);
+  transition: all 0.25s ease;
 }
 
 .data-table tbody tr:hover {
-  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
-  transform: scale(1.005);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: rgba(93, 146, 255, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(32, 86, 171, 0.08);
 }
 
 .data-table td {
-  padding: 14px 12px;
-  color: #000000;
+  padding: 16px 18px;
+  color: #1f2f47;
   vertical-align: middle;
 }
 
@@ -827,8 +837,8 @@ const cerrarImagenGrande = () => {
   display: flex;
   justify-content: flex-end;
   padding: 16px 20px;
-  border-top: 1px solid #f0f0f0;
-  background: #fafafa;
+  border-top: 1px solid rgba(32,86,171,0.12);
+  background: rgba(234,246,255,0.75);
 }
 
 .records-count {
@@ -842,12 +852,12 @@ const cerrarImagenGrande = () => {
     gap: 20px;
     align-items: stretch;
   }
-  
+
   .btn-action {
     width: 100%;
     justify-content: center;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
   }

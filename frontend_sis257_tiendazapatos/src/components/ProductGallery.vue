@@ -28,16 +28,26 @@ interface Categoria {
 
 const productos = ref<Producto[]>([])
 const categorias = ref<Categoria[]>([])
-const categoriaSeleccionada = ref<number | null>(null)
+const categoriaSeleccionada = ref<string | null>(null)
 const generoSeleccionado = ref<string | null>(null)
 const loading = ref(true)
 
 const productosFiltrados = computed(() => {
   let resultado = productos.value
 
-  // Filtrar por categoría
+  // Filtrar por categoría de zapatos/zapatillas
   if (categoriaSeleccionada.value !== null) {
-    resultado = resultado.filter(p => p.categoria?.id === categoriaSeleccionada.value)
+    const opcion = categoriaSeleccionada.value
+    resultado = resultado.filter(p => {
+      const nombreCategoria = (p.categoria?.nombre || '').toLowerCase()
+      if (opcion === 'zapatos') {
+        return nombreCategoria.includes('zapato') || nombreCategoria.includes('zapatos')
+      }
+      if (opcion === 'zapatillas') {
+        return nombreCategoria.includes('zapatilla') || nombreCategoria.includes('tenis')
+      }
+      return true
+    })
   }
 
   // Filtrar por género
@@ -72,8 +82,8 @@ const cargarProductos = async () => {
   }
 }
 
-const seleccionarCategoria = (id: number | null) => {
-  categoriaSeleccionada.value = id
+const seleccionarCategoria = (categoria: string | null) => {
+  categoriaSeleccionada.value = categoria
 }
 
 const seleccionarGenero = (genero: string | null) => {
@@ -103,49 +113,53 @@ onMounted(() => {
     <div class="gallery-container">
       <!-- Header Section -->
       <div class="gallery-header">
-        <h2 class="gallery-title">Colección</h2>
+        <h2 class="gallery-title">Colección de Zapatos</h2>
         <div class="gallery-divider"></div>
       </div>
 
       <!-- Category Filter -->
-      <div class="category-filter" v-if="categorias.length > 0">
-        <button 
+      <div class="category-filter">
+        <button
           @click="seleccionarCategoria(null)"
           :class="['filter-btn', { active: categoriaSeleccionada === null }]"
         >
           Todos
         </button>
-        <button 
-          v-for="categoria in categorias" 
-          :key="categoria.id"
-          @click="seleccionarCategoria(categoria.id)"
-          :class="['filter-btn', { active: categoriaSeleccionada === categoria.id }]"
+        <button
+          @click="seleccionarCategoria('zapatos')"
+          :class="['filter-btn', { active: categoriaSeleccionada === 'zapatos' }]"
         >
-          {{ categoria.nombre }}
+          Zapatos
+        </button>
+        <button
+          @click="seleccionarCategoria('zapatillas')"
+          :class="['filter-btn', { active: categoriaSeleccionada === 'zapatillas' }]"
+        >
+          Zapatillas
         </button>
       </div>
 
       <!-- Gender Filter -->
       <div class="gender-filter">
-        <button 
+        <button
           @click="seleccionarGenero(null)"
           :class="['filter-btn', { active: generoSeleccionado === null }]"
         >
           Todos
         </button>
-        <button 
+        <button
           @click="seleccionarGenero('hombre')"
           :class="['filter-btn', { active: generoSeleccionado === 'hombre' }]"
         >
           Hombre
         </button>
-        <button 
+        <button
           @click="seleccionarGenero('mujer')"
           :class="['filter-btn', { active: generoSeleccionado === 'mujer' }]"
         >
           Mujer
         </button>
-        <button 
+        <button
           @click="seleccionarGenero('unisex')"
           :class="['filter-btn', { active: generoSeleccionado === 'unisex' }]"
         >
@@ -202,7 +216,7 @@ onMounted(() => {
 /* Diseño editorial premium - inspirado en COS, Arket, The Row */
 
 .gallery-section {
-  background: #ffffff;
+  background: linear-gradient(180deg, #c6d8ff 0%, #9fb9ff 100%);
   padding: 60px 0 80px 0;
 }
 

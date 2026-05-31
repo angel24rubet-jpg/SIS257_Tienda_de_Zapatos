@@ -45,7 +45,7 @@
             <span>Editar perfil</span>
           </button>
         </div>
-        
+
         <!-- Contact Details -->
         <div class="contact-grid">
           <div class="contact-item">
@@ -128,9 +128,9 @@
 
         <!-- Orders List -->
         <div v-else class="orders-list">
-          <article 
-            v-for="pedido in pedidos" 
-            :key="pedido.id" 
+          <article
+            v-for="pedido in pedidos"
+            :key="pedido.id"
             class="order-card"
             :class="{ 'is-expanded': expandedOrder === pedido.id }"
           >
@@ -254,7 +254,7 @@
         <div class="section-title">
           <h3>Configuración</h3>
         </div>
-        
+
         <div class="settings-list">
           <button class="setting-item" @click="openPasswordModal">
             <div class="setting-icon">
@@ -354,7 +354,7 @@
                 </svg>
               </button>
             </div>
-            
+
             <Transition name="fade">
               <div v-if="passwordSuccess" class="toast success">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -363,7 +363,7 @@
                 <span>Contraseña actualizada correctamente</span>
               </div>
             </Transition>
-            
+
             <Transition name="fade">
               <div v-if="passwordError" class="toast error">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -377,10 +377,10 @@
               <div class="input-group">
                 <label>Contraseña actual</label>
                 <div class="password-field">
-                  <input 
-                    v-model="passwordForm.actual" 
-                    :type="showCurrentPw ? 'text' : 'password'" 
-                    placeholder="••••••••" 
+                  <input
+                    v-model="passwordForm.actual"
+                    :type="showCurrentPw ? 'text' : 'password'"
+                    placeholder="••••••••"
                   />
                   <button type="button" class="toggle-pw" @click="showCurrentPw = !showCurrentPw">
                     <svg v-if="!showCurrentPw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -526,8 +526,8 @@ function formatCurrency(val: number | undefined) {
 
 function formatDate(val: string | undefined) {
   if (!val) return '—'
-  return new Intl.DateTimeFormat('es-ES', { 
-    day: 'numeric', month: 'long', year: 'numeric' 
+  return new Intl.DateTimeFormat('es-ES', {
+    day: 'numeric', month: 'long', year: 'numeric'
   }).format(new Date(val))
 }
 
@@ -542,8 +542,8 @@ function formatGenero(genero: string | undefined) {
 
 function formatFechaNacimiento(fecha: string | Date | undefined) {
   if (!fecha) return 'No registrada'
-  return new Intl.DateTimeFormat('es-ES', { 
-    day: 'numeric', month: 'long', year: 'numeric' 
+  return new Intl.DateTimeFormat('es-ES', {
+    day: 'numeric', month: 'long', year: 'numeric'
   }).format(new Date(fecha))
 }
 
@@ -667,7 +667,7 @@ async function changePassword() {
   changingPassword.value = true
   passwordError.value = ''
   passwordSuccess.value = false
-  
+
   try {
     await http.patch('auth/change-password', {
       claveActual: passwordForm.actual,
@@ -693,50 +693,47 @@ function logout() {
 
 <style scoped>
 /* ========================================
-   CUENTA VIEW - PREMIUM FASHION STYLE
+   CUENTA VIEW - PASTEL BLUE REDESIGN
    ======================================== */
 
 .cuenta-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #fafafa 0%, #f0f0f0 100%);
+  background: linear-gradient(180deg, #f3f8ff 0%, #eef5ff 100%);
 }
 
-/* Override theme.css section padding */
 .cuenta-page section {
   padding-top: 0;
   padding-bottom: 0;
 }
 
-/* ========================================
-   HEADER
-   ======================================== */
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
-  background: #fff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  gap: 24px;
+  padding: 24px 32px;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(55, 89, 184, 0.14);
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(55, 89, 184, 0.05);
 }
 
 .back-link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #1a1a1a;
+  color: #31518a;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  transition: opacity 0.2s;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .back-link:hover {
-  opacity: 0.6;
+  color: #13315f;
 }
 
 .back-link svg {
@@ -746,39 +743,35 @@ function logout() {
 
 .page-title {
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: #1f3a67;
   margin: 0;
 }
 
 .logout-btn {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid #e0e0e0;
+  background: rgba(55, 89, 184, 0.08);
+  border: 1px solid rgba(55, 89, 184, 0.22);
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(55, 89, 184, 0.14);
 }
 
 .logout-btn svg {
   width: 18px;
   height: 18px;
-  color: #666;
-}
-
-.logout-btn:hover {
-  background: #1a1a1a;
-  border-color: #1a1a1a;
-}
-
-.logout-btn:hover svg {
-  color: #fff;
+  color: #31518a;
 }
 
 /* ========================================
@@ -808,32 +801,42 @@ function logout() {
    MAIN CONTENT
    ======================================== */
 .main-content {
-  max-width: 720px;
+  max-width: 940px;
   margin: 0 auto;
-  padding: 32px 24px 60px;
+  padding: 32px 24px 72px;
 }
 
 /* ========================================
    PROFILE CARD
    ======================================== */
 .profile-card {
-  background: #fff;
-  border-radius: 16px;
+  position: relative;
+  background: transparent;
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.45) 100%);
+  pointer-events: none;
 }
 
 .profile-visual {
   position: relative;
-  height: 100px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+  height: 150px;
+  background: linear-gradient(135deg, #dbe9ff 0%, #f3f7ff 100%);
 }
 
 .profile-pattern {
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.72) 0%, transparent 18%),
+    radial-gradient(circle at 85% 28%, rgba(255,255,255,0.55) 0%, transparent 14%),
+    radial-gradient(circle at 50% 80%, rgba(55, 89, 184, 0.08) 0%, transparent 18%);
 }
 
 .avatar-wrapper {
@@ -843,126 +846,126 @@ function logout() {
 
 .avatar {
   position: absolute;
-  top: -36px;
-  left: 24px;
-  width: 72px;
-  height: 72px;
-  background: #fff;
+  top: -40px;
+  left: 28px;
+  width: 84px;
+  height: 84px;
+  background: linear-gradient(135deg, #6a9dff 0%, #3a6fe8 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
-  border: 3px solid #fff;
+  box-shadow: 0 20px 45px rgba(55, 89, 184, 0.18);
+  border: 4px solid #fff;
   z-index: 10;
 }
 
 .avatar-letter {
-  font-size: 28px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 32px;
+  font-weight: 800;
+  color: #fff;
   text-transform: uppercase;
 }
 
 .profile-body {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  padding: 16px 24px 20px;
+  gap: 18px;
+  padding: 26px 30px 28px;
+  background: #ffffff;
+  border-radius: 0 0 32px 32px;
+  box-shadow: 0 16px 40px rgba(55, 89, 184, 0.08);
 }
 
 .profile-info {
   flex: 1;
+  min-width: 220px;
 }
 
 .profile-name {
-  font-size: 22px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 4px;
-  letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #1f365f;
+  margin: 0 0 6px;
 }
 
 .profile-username {
   font-size: 14px;
-  color: #888;
+  color: #64748b;
 }
 
 .edit-profile-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: transparent;
-  border: 1.5px solid #1a1a1a;
-  border-radius: 100px;
+  gap: 10px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #3767d6 0%, #6a9dff 100%);
+  border: none;
+  border-radius: 999px;
   font-size: 13px;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #fff;
   cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.edit-profile-btn svg {
-  width: 16px;
-  height: 16px;
+  box-shadow: 0 16px 30px rgba(55, 89, 184, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .edit-profile-btn:hover {
-  background: #1a1a1a;
-  color: #fff;
+  transform: translateY(-1px);
 }
 
-/* Contact Grid */
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: #f0f0f0;
-  border-top: 1px solid #f0f0f0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 24px;
-  background: #fff;
+  gap: 16px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid rgba(55, 89, 184, 0.12);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(55, 89, 184, 0.05);
 }
 
 .contact-icon {
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f7f7f7;
-  border-radius: 12px;
+  background: rgba(55, 89, 184, 0.1);
+  border-radius: 18px;
 }
 
 .contact-icon svg {
-  width: 20px;
-  height: 20px;
-  color: #666;
+  width: 22px;
+  height: 22px;
+  color: #3759b8;
 }
 
 .contact-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .contact-label {
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #999;
+  color: #5b6d8d;
 }
 
 .contact-value {
   font-size: 14px;
-  color: #1a1a1a;
+  color: #243b63;
   font-weight: 500;
 }
 
@@ -970,22 +973,22 @@ function logout() {
    SECTIONS
    ======================================== */
 .section {
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 .section-title {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 .section-title h3 {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: #1f3a67;
   margin: 0;
 }
 
@@ -993,14 +996,14 @@ function logout() {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 7px;
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  border-radius: 100px;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 10px;
+  background: rgba(55, 89, 184, 0.14);
+  color: #21447f;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
 }
 
 /* ========================================
@@ -1009,16 +1012,16 @@ function logout() {
 .empty-state {
   text-align: center;
   padding: 56px 32px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  background: linear-gradient(180deg, #eef5ff 0%, #ffffff 100%);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(55, 89, 184, 0.08);
 }
 
 .empty-illustration {
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   margin: 0 auto 20px;
-  background: #f7f7f7;
+  background: rgba(55, 89, 184, 0.08);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1026,42 +1029,42 @@ function logout() {
 }
 
 .empty-illustration svg {
-  width: 36px;
-  height: 36px;
-  color: #bbb;
+  width: 44px;
+  height: 44px;
+  color: #3759b8;
 }
 
 .empty-state h4 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f365f;
+  margin: 0 0 10px;
 }
 
 .empty-state p {
   font-size: 14px;
-  color: #888;
-  margin: 0 0 24px;
+  color: #637492;
+  margin: 0 0 26px;
 }
 
 .cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
-  background: #1a1a1a;
+  padding: 14px 34px;
+  background: linear-gradient(135deg, #3767d6 0%, #6a9dff 100%);
   color: #fff;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-decoration: none;
   border-radius: 100px;
-  transition: all 0.25s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cta-btn:hover {
-  background: #333;
   transform: translateY(-1px);
+  box-shadow: 0 18px 36px rgba(55, 89, 184, 0.18);
 }
 
 /* ========================================
@@ -1070,32 +1073,34 @@ function logout() {
 .orders-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 18px;
 }
 
 .order-card {
-  background: #fff;
-  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(55, 89, 184, 0.12);
+  border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.25s ease;
+  box-shadow: 0 24px 70px rgba(55, 89, 184, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .order-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 28px 80px rgba(55, 89, 184, 0.11);
 }
 
 .order-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px;
+  padding: 22px 24px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 
 .order-header:hover {
-  background: #fafafa;
+  background: rgba(55, 89, 184, 0.04);
 }
 
 .order-info {
@@ -1106,13 +1111,13 @@ function logout() {
 
 .order-number {
   font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 800;
+  color: #1f375f;
 }
 
 .order-date {
   font-size: 13px;
-  color: #888;
+  color: #64748b;
 }
 
 .order-right {
@@ -1122,62 +1127,64 @@ function logout() {
 }
 
 .status-pill {
-  padding: 6px 12px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  border-radius: 100px;
+  border-radius: 999px;
 }
 
-.status-pill.pending {
-  background: #fef3c7;
-  color: #92400e;
+.status-pill.pending { background: rgba(254, 243, 199, 0.95); color: #92400e; }
+.status-pill.completed { background: rgba(209, 250, 229, 0.95); color: #065f46; }
+.status-pill.cancelled { background: rgba(254, 226, 226, 0.95); color: #b91c1c; }
+.status-pill.preparing { background: rgba(224, 231, 255, 0.95); color: #3730a3; }
+.status-pill.shipped { background: rgba(219, 234, 254, 0.95); color: #1e40af; }
+.status-pill.delivered { background: rgba(209, 250, 229, 0.95); color: #065f46; }
+.status-pill.default { background: rgba(243, 244, 246, 0.95); color: #4b5563; }
+
+.order-amount {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  min-width: 90px;
+  text-align: right;
 }
 
-.status-pill.completed {
-  background: #d1fae5;
-  color: #065f46;
+.expand-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef5ff;
+  border-radius: 14px;
+  transition: transform 0.3s ease;
 }
 
-.status-pill.cancelled {
-  background: #fee2e2;
-  color: #991b1b;
+.expand-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #3759b8;
 }
 
-.status-pill.preparing {
-  background: #e0e7ff;
-  color: #3730a3;
-}
-
-.status-pill.shipped {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
-.status-pill.delivered {
-  background: #d1fae5;
-  color: #065f46;
-}
-
-.status-pill.default {
-  background: #f3f4f6;
-  color: #4b5563;
+.order-card.is-expanded .expand-icon {
+  transform: rotate(180deg);
 }
 
 /* Tracking Section */
 .tracking-section {
   padding: 20px;
-  background: #fafafa;
-  border-bottom: 1px solid #f0f0f0;
+  background: #f8fbff;
+  border-bottom: 1px solid rgba(55, 89, 184, 0.1);
 }
 
 .tracking-title {
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #666;
+  color: #3759b8;
   margin: 0 0 16px 0;
 }
 
@@ -1185,7 +1192,7 @@ function logout() {
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .tracking-timeline::before {
@@ -1195,7 +1202,7 @@ function logout() {
   left: 24px;
   right: 24px;
   height: 2px;
-  background: #e5e5e5;
+  background: rgba(55, 89, 184, 0.16);
   z-index: 0;
 }
 
@@ -1209,27 +1216,27 @@ function logout() {
 }
 
 .step-icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #e5e5e5;
+  border: 2px solid rgba(55, 89, 184, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   transition: all 0.3s ease;
 }
 
 .step-icon svg {
   width: 18px;
   height: 18px;
-  color: #ccc;
+  color: rgba(55, 89, 184, 0.8);
 }
 
 .timeline-step.completed .step-icon {
-  background: #1a1a1a;
-  border-color: #1a1a1a;
+  background: #3759b8;
+  border-color: #3759b8;
 }
 
 .timeline-step.completed .step-icon svg {
@@ -1237,13 +1244,13 @@ function logout() {
 }
 
 .timeline-step.active .step-icon {
-  background: #fff;
-  border-color: #1a1a1a;
-  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.1);
+  background: #ffffff;
+  border-color: #3759b8;
+  box-shadow: 0 0 0 6px rgba(55, 89, 184, 0.1);
 }
 
 .timeline-step.active .step-icon svg {
-  color: #1a1a1a;
+  color: #3759b8;
 }
 
 .step-info {
@@ -1253,107 +1260,73 @@ function logout() {
 .step-name {
   display: block;
   font-size: 11px;
-  font-weight: 600;
-  color: #999;
+  font-weight: 700;
+  color: #64748b;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.08em;
 }
 
 .timeline-step.completed .step-name,
 .timeline-step.active .step-name {
-  color: #1a1a1a;
+  color: #1f365f;
 }
 
 .step-date {
   display: block;
-  font-size: 10px;
-  color: #bbb;
-  margin-top: 2px;
-}
-
-.timeline-step.completed .step-date {
-  color: #666;
+  font-size: 11px;
+  color: #91a1c0;
+  margin-top: 4px;
 }
 
 .tracking-number {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  background: #fff;
-  border: 1px dashed #e5e5e5;
-  border-radius: 8px;
-  margin-top: 12px;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1px dashed rgba(55, 89, 184, 0.24);
+  border-radius: 16px;
+  margin-top: 14px;
 }
 
 .tracking-label {
   font-size: 12px;
-  color: #666;
+  color: #64748b;
 }
 
 .tracking-code {
   font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #1f365f;
   font-family: monospace;
-  letter-spacing: 1px;
+  letter-spacing: 0.08em;
 }
 
-.order-amount {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
-  min-width: 90px;
-  text-align: right;
-}
-
-.expand-icon {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f5f5f5;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.expand-icon svg {
-  width: 16px;
-  height: 16px;
-  color: #666;
-}
-
-.order-card.is-expanded .expand-icon {
-  transform: rotate(180deg);
-}
-
-/* Order Content */
 .order-content {
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid rgba(55, 89, 184, 0.1);
 }
 
 .products-grid {
-  padding: 16px 20px;
+  padding: 18px 22px;
 }
 
 .product-item {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px 0;
+  padding: 14px 0;
 }
 
 .product-item:not(:last-child) {
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid rgba(55, 89, 184, 0.08);
 }
 
 .product-image {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
   overflow: hidden;
-  background: #f5f5f5;
+  background: #eef5ff;
 }
 
 .product-image img {
@@ -1366,46 +1339,46 @@ function logout() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .product-name {
   font-size: 14px;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #1f365f;
 }
 
 .product-meta {
   font-size: 13px;
-  color: #888;
+  color: #64748b;
 }
 
 .product-price {
   font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #1f365f;
 }
 
 .order-footer {
-  background: #fafafa;
-  padding: 16px 20px;
+  background: #f8fbff;
+  padding: 18px 22px;
 }
 
 .footer-row {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #666;
-  padding: 6px 0;
+  color: #64748b;
+  padding: 8px 0;
 }
 
 .footer-row.total {
   font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #1f365f;
   padding-top: 12px;
   margin-top: 8px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid rgba(55, 89, 184, 0.08);
 }
 
 /* ========================================
@@ -1414,7 +1387,7 @@ function logout() {
 .settings-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 14px;
 }
 
 .setting-item {
@@ -1422,35 +1395,34 @@ function logout() {
   align-items: center;
   gap: 16px;
   width: 100%;
-  padding: 18px 20px;
-  background: #fff;
-  border: none;
-  border-radius: 14px;
+  padding: 20px 22px;
+  background: #ffffff;
+  border: 1px solid rgba(55, 89, 184, 0.12);
+  border-radius: 24px;
   cursor: pointer;
-  transition: all 0.2s;
-  text-align: left;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 20px 55px rgba(55, 89, 184, 0.06);
 }
 
 .setting-item:hover {
-  background: #fafafa;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 24px 64px rgba(55, 89, 184, 0.09);
 }
 
 .setting-icon {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
-  border-radius: 12px;
+  background: rgba(55, 89, 184, 0.1);
+  border-radius: 18px;
 }
 
 .setting-icon svg {
   width: 22px;
   height: 22px;
-  color: #1a1a1a;
+  color: #3759b8;
 }
 
 .setting-text {
@@ -1460,20 +1432,20 @@ function logout() {
 .setting-text strong {
   display: block;
   font-size: 15px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 800;
+  color: #1f365f;
   margin-bottom: 2px;
 }
 
 .setting-text span {
   font-size: 13px;
-  color: #888;
+  color: #64748b;
 }
 
 .arrow-icon {
-  width: 20px;
-  height: 20px;
-  color: #ccc;
+  width: 22px;
+  height: 22px;
+  color: rgba(55, 89, 184, 0.7);
 }
 
 /* ========================================
@@ -1495,13 +1467,14 @@ function logout() {
 }
 
 .modal {
-  background: #fff;
-  border-radius: 20px;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border-radius: 28px;
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 28px 70px rgba(15, 57, 112, 0.16);
+  border: 1px solid rgba(94, 146, 255, 0.18);
 }
 
 .modal-header {
@@ -1509,41 +1482,37 @@ function logout() {
   align-items: center;
   justify-content: space-between;
   padding: 24px 28px 20px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(55, 89, 184, 0.12);
 }
 
 .modal-header h3 {
   font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #18315a;
   margin: 0;
 }
 
 .modal-close {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
+  background: rgba(55, 89, 184, 0.1);
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s ease;
 }
 
 .modal-close svg {
   width: 18px;
   height: 18px;
-  color: #666;
+  color: #2f4f86;
 }
 
 .modal-close:hover {
-  background: #1a1a1a;
-}
-
-.modal-close:hover svg {
-  color: #fff;
+  background: rgba(55, 89, 184, 0.18);
 }
 
 .modal-form {
@@ -1569,33 +1538,44 @@ function logout() {
 .input-group label {
   display: block;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #666;
+  color: #5c728f;
   margin-bottom: 8px;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
   width: 100%;
   padding: 14px 16px;
-  background: #f7f7f7;
-  border: 1.5px solid transparent;
-  border-radius: 12px;
+  background: rgba(246, 252, 255, 0.96);
+  border: 1px solid rgba(111, 143, 212, 0.35);
+  border-radius: 14px;
   font-size: 15px;
   color: #1a1a1a;
-  transition: all 0.2s;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
 }
 
-.input-group input::placeholder {
-  color: #aaa;
+.input-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7c9d' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
 }
 
-.input-group input:focus {
+.input-group input::placeholder {
+  color: #aab8d1;
+}
+
+.input-group input:focus,
+.input-group select:focus {
   outline: none;
-  background: #fff;
-  border-color: #1a1a1a;
+  background: #ffffff;
+  border-color: rgba(55, 89, 184, 0.8);
+  box-shadow: 0 0 0 4px rgba(55, 89, 184, 0.1);
 }
 
 .input-error {
@@ -1608,7 +1588,7 @@ function logout() {
 .input-hint {
   display: block;
   font-size: 11px;
-  color: #999;
+  color: #7b8ca0;
   margin-top: 6px;
 }
 
@@ -1630,20 +1610,21 @@ function logout() {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
+  background: rgba(55, 89, 184, 0.08);
   border: none;
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .toggle-pw svg {
   width: 20px;
   height: 20px;
-  color: #888;
+  color: #5b6d8d;
 }
 
 /* Password Strength */
@@ -1657,8 +1638,8 @@ function logout() {
 .strength-bar {
   flex: 1;
   height: 4px;
-  background: #e5e5e5;
-  border-radius: 2px;
+  background: rgba(55, 89, 184, 0.12);
+  border-radius: 999px;
   position: relative;
   overflow: hidden;
 }
@@ -1669,7 +1650,7 @@ function logout() {
   left: 0;
   top: 0;
   height: 100%;
-  border-radius: 2px;
+  border-radius: 999px;
   transition: all 0.3s;
 }
 
@@ -1690,80 +1671,79 @@ function logout() {
 
 .password-strength span {
   font-size: 12px;
-  color: #888;
+  color: #5b6d8d;
   min-width: 50px;
 }
 
-/* Modal Actions */
 .modal-actions {
   display: flex;
   gap: 12px;
   margin-top: 28px;
   padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid rgba(55, 89, 184, 0.12);
 }
 
 .btn-secondary {
   flex: 1;
   padding: 14px 24px;
-  background: #f5f5f5;
-  border: none;
-  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(55, 89, 184, 0.2);
+  border-radius: 14px;
   font-size: 14px;
-  font-weight: 600;
-  color: #666;
+  font-weight: 700;
+  color: #3759b8;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background: #e5e5e5;
-  color: #1a1a1a;
+  background: rgba(55, 89, 184, 0.08);
+  color: #18315a;
 }
 
 .btn-primary {
   flex: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 14px 24px;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #3767d6 0%, #6a9dff 100%);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 36px rgba(55, 89, 184, 0.18);
 }
 
 .btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .btn-loader {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255,255,255,0.35);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
-/* Toast Notifications */
 .toast {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 14px 20px;
-  margin: 20px 28px 0;
-  border-radius: 12px;
+  margin: 20px 0 0;
+  border-radius: 14px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -1986,13 +1966,14 @@ function logout() {
 }
 
 .cuenta-modal {
-  background: #fff;
-  border-radius: 20px;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  border-radius: 28px;
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 28px 70px rgba(15, 57, 112, 0.16);
+  border: 1px solid rgba(94, 146, 255, 0.18);
 }
 
 .cuenta-modal .modal-header {
@@ -2000,41 +1981,37 @@ function logout() {
   align-items: center;
   justify-content: space-between;
   padding: 24px 28px 20px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(55, 89, 184, 0.12);
 }
 
 .cuenta-modal .modal-header h3 {
   font-size: 18px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #18315a;
   margin: 0;
 }
 
 .cuenta-modal .modal-close {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
+  background: rgba(55, 89, 184, 0.1);
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s ease;
 }
 
 .cuenta-modal .modal-close svg {
   width: 18px;
   height: 18px;
-  color: #666;
+  color: #2f4f86;
 }
 
 .cuenta-modal .modal-close:hover {
-  background: #1a1a1a;
-}
-
-.cuenta-modal .modal-close:hover svg {
-  color: #fff;
+  background: rgba(55, 89, 184, 0.18);
 }
 
 .cuenta-modal .modal-form {
@@ -2059,10 +2036,10 @@ function logout() {
 .cuenta-modal .input-group label {
   display: block;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #666;
+  color: #5c728f;
   margin-bottom: 8px;
 }
 
@@ -2070,38 +2047,39 @@ function logout() {
 .cuenta-modal .input-group select {
   width: 100%;
   padding: 14px 16px;
-  background: #f7f7f7;
-  border: 1.5px solid transparent;
-  border-radius: 12px;
+  background: rgba(246, 252, 255, 0.96);
+  border: 1px solid rgba(111, 143, 212, 0.35);
+  border-radius: 14px;
   font-size: 15px;
   color: #1a1a1a;
-  transition: all 0.2s;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
 }
 
 .cuenta-modal .input-group select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7c9d' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 16px center;
 }
 
 .cuenta-modal .input-group input::placeholder {
-  color: #aaa;
+  color: #aab8d1;
 }
 
 .cuenta-modal .input-group input:focus,
 .cuenta-modal .input-group select:focus {
   outline: none;
-  background: #fff;
-  border-color: #1a1a1a;
+  background: #ffffff;
+  border-color: rgba(55, 89, 184, 0.8);
+  box-shadow: 0 0 0 4px rgba(55, 89, 184, 0.1);
 }
 
 .cuenta-modal .input-hint {
   display: block;
   font-size: 11px;
-  color: #999;
+  color: #7b8ca0;
   margin-top: 6px;
 }
 
@@ -2114,57 +2092,58 @@ function logout() {
   gap: 12px;
   margin-top: 28px;
   padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid rgba(55, 89, 184, 0.12);
 }
 
 .cuenta-modal .btn-secondary {
   flex: 1;
   padding: 14px 24px;
-  background: #f5f5f5;
-  border: none;
-  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(55, 89, 184, 0.2);
+  border-radius: 14px;
   font-size: 14px;
-  font-weight: 600;
-  color: #666;
+  font-weight: 700;
+  color: #3759b8;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .cuenta-modal .btn-secondary:hover {
-  background: #e5e5e5;
-  color: #1a1a1a;
+  background: rgba(55, 89, 184, 0.08);
+  color: #18315a;
 }
 
 .cuenta-modal .btn-primary {
   flex: 1;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 14px 24px;
-  background: #1a1a1a;
+  background: linear-gradient(135deg, #3767d6 0%, #6a9dff 100%);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cuenta-modal .btn-primary:hover:not(:disabled) {
-  background: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 36px rgba(55, 89, 184, 0.18);
 }
 
 .cuenta-modal .btn-primary:disabled {
-  opacity: 0.5;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .cuenta-modal .btn-loader {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255,255,255,0.35);
   border-top-color: #fff;
   border-radius: 50%;
   animation: cuentaSpin 0.8s linear infinite;
@@ -2181,7 +2160,7 @@ function logout() {
   gap: 12px;
   padding: 14px 20px;
   margin: 20px 28px 0;
-  border-radius: 12px;
+  border-radius: 14px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -2216,20 +2195,21 @@ function logout() {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
+  background: rgba(55, 89, 184, 0.08);
   border: none;
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .cuenta-modal .toggle-pw svg {
   width: 20px;
   height: 20px;
-  color: #888;
+  color: #5b6d8d;
 }
 
 /* Password Strength */
@@ -2243,8 +2223,8 @@ function logout() {
 .cuenta-modal .strength-bar {
   flex: 1;
   height: 4px;
-  background: #e5e5e5;
-  border-radius: 2px;
+  background: rgba(55, 89, 184, 0.12);
+  border-radius: 999px;
   position: relative;
   overflow: hidden;
 }
@@ -2255,7 +2235,7 @@ function logout() {
   left: 0;
   top: 0;
   height: 100%;
-  border-radius: 2px;
+  border-radius: 999px;
   transition: all 0.3s;
 }
 
@@ -2276,7 +2256,7 @@ function logout() {
 
 .cuenta-modal .password-strength span {
   font-size: 12px;
-  color: #888;
+  color: #5b6d8d;
   min-width: 50px;
 }
 
@@ -2310,7 +2290,7 @@ function logout() {
 
 @media (max-width: 640px) {
   .cuenta-modal {
-    border-radius: 20px 20px 0 0;
+    border-radius: 24px;
     max-height: 95vh;
   }
 
@@ -2318,10 +2298,10 @@ function logout() {
     align-items: flex-end;
     padding: 0;
   }
-  
+
   .cuenta-modal .input-row {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 16px;
   }
 }
 </style>

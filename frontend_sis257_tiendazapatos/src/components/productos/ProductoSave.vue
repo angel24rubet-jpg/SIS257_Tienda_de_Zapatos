@@ -89,7 +89,7 @@ watch(
         }
         // Parsear colores existentes (ahora son objetos con id)
         if (props.producto.colores && Array.isArray(props.producto.colores)) {
-          coloresSeleccionados.value = props.producto.colores.map((c: any) => 
+          coloresSeleccionados.value = props.producto.colores.map((c: any) =>
             typeof c === 'object' ? c.id : c
           )
         } else {
@@ -164,7 +164,7 @@ const guardarProducto = async () => {
     alert('Por favor complete todos los campos obligatorios')
     return
   }
-  
+
   if (tallasSeleccionadas.value.length === 0) {
     alert('Por favor seleccione al menos una talla')
     return
@@ -330,8 +330,8 @@ onMounted(() => {
                       @click="toggleColor(color.id)"
                       :title="color.nombre"
                     >
-                      <span 
-                        class="color-dot" 
+                      <span
+                        class="color-dot"
                         :style="{ backgroundColor: color.codigoHex || '#ccc' }"
                       ></span>
                       <span class="color-name">{{ color.nombre }}</span>
@@ -395,22 +395,25 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: radial-gradient(circle at top, rgba(131, 201, 255, 0.18), transparent 34%),
+    rgba(18, 50, 94, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  padding: 20px;
+  padding: 16px;
 }
 
 /* Contenedor del modal */
 .modal-container {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.98);
   width: 100%;
-  max-width: 700px;
-  max-height: 90vh;
+  max-width: 780px;
+  max-height: 92vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 32px;
+  box-shadow: 0 28px 80px rgba(14, 46, 112, 0.16);
+  border: 1px solid rgba(94, 129, 255, 0.16);
 }
 
 /* Header del modal */
@@ -418,30 +421,38 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px;
-  border-bottom: 1px solid #e5e5e5;
+  gap: 18px;
+  padding: 28px 30px;
+  background: linear-gradient(135deg, rgba(233, 244, 255, 0.96), rgba(244, 250, 255, 0.98));
+  border-bottom: 1px solid rgba(94, 129, 255, 0.14);
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
 }
 
 .modal-title {
-  font-size: 1.5rem;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  color: #000000;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: #13315f;
   margin: 0;
 }
 
 .modal-close {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #666666;
-  padding: 0;
-  width: 24px;
-  height: 24px;
+  background: rgba(20, 40, 85, 0.06);
+  border: 1px solid rgba(20, 40, 85, 0.12);
+  border-radius: 50%;
+  color: #1d3a6f;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(20, 40, 85, 0.12);
+  color: #0f2144;
 }
 
 .modal-close:hover {
@@ -450,12 +461,12 @@ onMounted(() => {
 
 /* Body del modal */
 .modal-body {
-  padding: 30px;
+  padding: 30px 32px 28px;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -470,36 +481,36 @@ onMounted(() => {
 
 .form-label {
   display: block;
-  color: #666666;
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  color: #2d4a7f;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
 .form-input,
 .form-select {
   width: 100%;
-  height: 54px;
-  border: 1px solid #e5e5e5;
-  border-radius: 0;
-  font-size: 0.9375rem;
-  color: #000000;
-  background: #ffffff;
-  padding: 0 16px;
-  transition: all 0.2s ease;
+  min-height: 56px;
+  border: 1px solid rgba(94, 129, 255, 0.22);
+  border-radius: 18px;
+  font-size: 1rem;
+  color: #1f2d3d;
+  background: rgba(255,255,255,0.98);
+  padding: 0 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-textarea {
   width: 100%;
-  border: 1px solid #e5e5e5;
-  border-radius: 0;
-  font-size: 0.9375rem;
-  color: #000000;
-  background: #ffffff;
-  padding: 16px;
-  transition: all 0.2s ease;
+  border: 1px solid rgba(94, 129, 255, 0.22);
+  border-radius: 18px;
+  font-size: 1rem;
+  color: #1f2d3d;
+  background: rgba(255,255,255,0.98);
+  padding: 18px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   resize: vertical;
   font-family: inherit;
 }
@@ -514,16 +525,17 @@ onMounted(() => {
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: #000000;
+  border-color: #5d92ff;
+  box-shadow: 0 0 0 4px rgba(93, 146, 255, 0.14);
 }
 
 .form-select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000000' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23172f4c' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 16px center;
-  padding-right: 40px;
+  background-position: right 18px center;
+  padding-right: 46px;
 }
 
 .image-preview {
@@ -540,30 +552,32 @@ onMounted(() => {
 
 /* Tallas múltiples */
 .tallas-container {
-  border: 1px solid #e5e5e5;
-  padding: 16px;
-  background: #fafafa;
+  border: 1px solid rgba(94, 129, 255, 0.18);
+  padding: 18px;
+  background: rgba(236, 244, 255, 0.88);
+  border-radius: 22px;
 }
 
 .tallas-actions {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid rgba(94, 129, 255, 0.14);
 }
 
 .talla-action-btn {
   background: #ffffff;
-  border: 1px solid #e5e5e5;
-  padding: 6px 14px;
-  font-size: 0.75rem;
-  font-weight: 400;
-  letter-spacing: 0.3px;
+  border: 1px solid rgba(94, 129, 255, 0.24);
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-transform: uppercase;
+  border-radius: 999px;
 }
 
 .talla-action-btn:hover {
@@ -586,74 +600,77 @@ onMounted(() => {
 }
 
 .talla-chip {
-  min-width: 48px;
-  height: 40px;
-  padding: 0 14px;
-  border: 1px solid #e5e5e5;
+  min-width: 58px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(94, 129, 255, 0.2);
   background: #ffffff;
-  color: #000000;
-  font-size: 0.875rem;
-  font-weight: 400;
+  color: #1f2d3d;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 14px;
 }
 
 .talla-chip:hover {
-  border-color: #000000;
+  border-color: rgba(94, 129, 255, 0.4);
 }
 
 .talla-chip.selected {
-  background: #000000;
+  background: linear-gradient(135deg, #81b0ff 0%, #5d92ff 100%);
   color: #ffffff;
-  border-color: #000000;
+  border-color: transparent;
 }
 
 /* Colores múltiples */
 .colores-container {
-  border: 1px solid #e5e5e5;
-  padding: 16px;
-  background: #fafafa;
+  border: 1px solid rgba(94, 129, 255, 0.18);
+  padding: 18px;
+  background: rgba(236, 244, 255, 0.88);
+  border-radius: 22px;
 }
 
 .colores-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .color-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 1px solid #e5e5e5;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid rgba(94, 129, 255, 0.18);
   background: #ffffff;
-  color: #000000;
-  font-size: 0.8125rem;
-  font-weight: 400;
+  color: #1f2d3d;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  border-radius: 14px;
 }
 
 .color-chip:hover {
-  border-color: #000000;
+  border-color: rgba(94, 129, 255, 0.34);
 }
 
 .color-chip.selected {
-  background: #000000;
+  background: linear-gradient(135deg, #81b0ff 0%, #5d92ff 100%);
   color: #ffffff;
-  border-color: #000000;
+  border-color: transparent;
 }
 
 .color-dot {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(20, 40, 85, 0.16);
   flex-shrink: 0;
 }
 
@@ -685,45 +702,47 @@ onMounted(() => {
 /* Footer del modal */
 .modal-footer {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   padding-top: 30px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid rgba(94, 129, 255, 0.18);
   margin-top: 30px;
 }
 
 .btn-primary {
-  background: #000000;
+  background: linear-gradient(135deg, #5d92ff 0%, #3f6cef 100%);
   color: #ffffff;
   border: none;
-  padding: 14px 32px;
-  font-size: 0.875rem;
-  font-weight: 400;
+  padding: 16px 34px;
+  font-size: 1rem;
+  font-weight: 700;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   flex: 1;
+  border-radius: 16px;
+  box-shadow: 0 16px 34px rgba(63, 108, 255, 0.18);
 }
 
 .btn-primary:hover {
-  background: #333333;
+  background: linear-gradient(135deg, #3f6cef 0%, #2e57da 100%);
 }
 
 .btn-secondary {
-  background: transparent;
-  color: #000000;
-  border: 1px solid #e5e5e5;
-  padding: 14px 32px;
-  font-size: 0.875rem;
-  font-weight: 400;
+  background: rgba(255,255,255,0.92);
+  color: #0f2144;
+  border: 1px solid rgba(94, 129, 255, 0.28);
+  padding: 16px 34px;
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   flex: 1;
+  border-radius: 16px;
 }
 
 .btn-secondary:hover {
-  background: #fafafa;
-  border-color: #000000;
+  background: rgba(94, 129, 255, 0.08);
 }
 
 /* Animación del modal */

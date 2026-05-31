@@ -12,10 +12,10 @@ import ProductGallery from '@/components/ProductGallery.vue'
 
       <div class="container">
         <div class="row flex-center">
-          <div class="col-12 mb-10">
+          <div class="col-12 mb-10 text-center">
             <div class="d-flex align-items-center flex-column">
-              <h1 class="fw-normal">Con un estilo excepcional, solo para ti</h1>
-              <h1 class="fs-4 fs-lg-8 fs-md-6 fw-bold">Diseñado exclusivamente para ti</h1>
+              <h1 class="text-white text-uppercase fw-bold fs-2 fs-lg-4" style="letter-spacing:0.12em;">Zapatillas para cada paso de tu día</h1>
+              <h1 class="text-white text-uppercase fw-bold fs-3 fs-lg-7" style="letter-spacing:0.08em;">Estilo deportivo y comodidad en cada modelo</h1>
             </div>
           </div>
         </div>
@@ -48,60 +48,7 @@ import ProductGallery from '@/components/ProductGallery.vue'
     <!-- Product Gallery Section -->
     <ProductGallery />
 
-    <!-- Exclusive Collection Section (moved below the product gallery) -->
-    <section class="exclusive-collection-section">
-      <div class="container">
-        <div class="row h-100 g-0">
-          <div class="col-md-6">
-            <div class="bg-300 p-4 h-100 d-flex flex-column justify-content-center">
-              <h4 class="text-800">Colección exclusiva 2025</h4>
-              <h1 class="fw-semi-bold lh-sm fs-4 fs-lg-5 fs-xl-6">Se exclusivo</h1>
-              <p class="mb-5 fs-1">La mejor opción diaria en un rango de Super Ahorro dentro de un precio razonable. Es nuestra responsabilidad mantenerte 100 por ciento elegante. Sé inteligente y moderno con nosotros.</p>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card card-span h-100 text-white">
-              <img class="card-img h-100" src="/src/assets/img/gallery/outfit.png" alt="Outfit" />
-              <div class="card-img-overlay bg-dark-gradient">
-                <div class="d-flex align-items-end justify-content-center h-100">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row h-100 g-2 py-1">
-          <div class="col-md-4">
-            <div class="card card-span h-100 text-white">
-              <img class="card-img h-100" src="/src/assets/img/gallery/vanity-bag.png" alt="Vanity Bags" />
-              <div class="card-img-overlay bg-dark-gradient">
-                <div class="d-flex align-items-end justify-content-center h-100">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-span h-100 text-white">
-              <img class="card-img h-100" src="/src/assets/img/gallery/hat.png" alt="Sombreros" />
-              <div class="card-img-overlay bg-dark-gradient">
-                <div class="d-flex align-items-end justify-content-center h-100">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card card-span h-100 text-white">
-              <img class="card-img h-100" src="/src/assets/img/gallery/high-heels.png" alt="Tacones" />
-              <div class="card-img-overlay bg-dark-gradient">
-                <div class="d-flex align-items-end justify-content-center h-100">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== FEATURES / BENEFICIOS SECTION ========== -->
+    <!-- ========== PROMO BANNER ========== -->
     <section class="features-section py-5">
       <div class="container">
         <div class="row text-center mb-5">
@@ -204,228 +151,6 @@ import ProductGallery from '@/components/ProductGallery.vue'
       </div>
     </section>
 
-    <!-- ========== TRENDING PRODUCTS SECTION ========== -->
-    <section class="trending-section py-5">
-      <div class="container">
-        <div class="row text-center mb-5">
-          <div class="col-12">
-            <h2 class="section-title fw-bold">Tendencias de la Temporada</h2>
-            <p class="section-subtitle text-muted">Los productos más populares entre nuestros clientes</p>
-          </div>
-        </div>
-        <div class="row g-4">
-          <div class="col-lg-3 col-md-6">
-            <div class="trending-card">
-              <div class="trending-image-wrapper">
-                <img src="/src/assets/img/gallery/formal-coat.png" alt="Abrigo Formal" class="trending-image">
-                <span class="trending-badge">TOP VENTAS</span>
-                <div class="trending-overlay">
-                  <button class="btn-quick-view">Vista Rápida</button>
-                </div>
-              </div>
-              <div class="trending-info">
-                <h6 class="trending-name">Abrigo Formal Premium</h6>
-                <div class="trending-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="reviews">(128)</span>
-                </div>
-                <p class="trending-price">450 Bs</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="trending-card">
-              <div class="trending-image-wrapper">
-                <img src="/src/assets/img/gallery/sweater.png" alt="Suéter" class="trending-image">
-                <span class="trending-badge new">NUEVO</span>
-                <div class="trending-overlay">
-                  <button class="btn-quick-view">Vista Rápida</button>
-                </div>
-              </div>
-              <div class="trending-info">
-                <h6 class="trending-name">Suéter Tejido Comfort</h6>
-                <div class="trending-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="reviews">(89)</span>
-                </div>
-                <p class="trending-price">180 Bs</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="trending-card">
-              <div class="trending-image-wrapper">
-                <img src="/src/assets/img/gallery/sharp-dress.png" alt="Vestido" class="trending-image">
-                <span class="trending-badge sale">-20%</span>
-                <div class="trending-overlay">
-                  <button class="btn-quick-view">Vista Rápida</button>
-                </div>
-              </div>
-              <div class="trending-info">
-                <h6 class="trending-name">Vestido Elegante Night</h6>
-                <div class="trending-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="reviews">(256)</span>
-                </div>
-                <p class="trending-price"><span class="old-price">350 Bs</span> 280 Bs</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="trending-card">
-              <div class="trending-image-wrapper">
-                <img src="/src/assets/img/gallery/wallet.png" alt="Cartera" class="trending-image">
-                <div class="trending-overlay">
-                  <button class="btn-quick-view">Vista Rápida</button>
-                </div>
-              </div>
-              <div class="trending-info">
-                <h6 class="trending-name">Cartera Cuero Genuino</h6>
-                <div class="trending-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="reviews">(67)</span>
-                </div>
-                <p class="trending-price">120 Bs</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== TESTIMONIALS SECTION ========== -->
-    <section class="testimonials-section py-5 bg-light">
-      <div class="container">
-        <div class="row text-center mb-5">
-          <div class="col-12">
-            <h2 class="section-title fw-bold">Lo Que Dicen Nuestros Clientes</h2>
-            <p class="section-subtitle text-muted">Opiniones reales de compradores satisfechos</p>
-          </div>
-        </div>
-        <div class="row g-4">
-          <div class="col-lg-4">
-            <div class="testimonial-card">
-              <div class="testimonial-rating mb-3">
-                <span class="text-warning">★★★★★</span>
-              </div>
-              <p class="testimonial-text">"Excelente calidad en las prendas. El envío fue súper rápido y el empaque muy cuidado. La talla me quedó perfecta. Definitivamente volveré a comprar aquí."</p>
-              <div class="testimonial-author">
-                <img src="/src/assets/img/gallery/author-1.png" alt="María González" class="testimonial-avatar">
-                <div class="testimonial-info">
-                  <h6 class="testimonial-name">María González</h6>
-                  <span class="testimonial-role">Cliente desde 2024</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-card">
-              <div class="testimonial-rating mb-3">
-                <span class="text-warning">★★★★★</span>
-              </div>
-              <p class="testimonial-text">"Me encantó poder elegir múltiples tallas y ver el seguimiento de mi pedido en tiempo real. La atención al cliente es excelente, respondieron todas mis dudas al instante."</p>
-              <div class="testimonial-author">
-                <img src="/src/assets/img/gallery/author-2.png" alt="Carlos Mendoza" class="testimonial-avatar">
-                <div class="testimonial-info">
-                  <h6 class="testimonial-name">Carlos Mendoza</h6>
-                  <span class="testimonial-role">Cliente frecuente</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-card">
-              <div class="testimonial-rating mb-3">
-                <span class="text-warning">★★★★★</span>
-              </div>
-              <p class="testimonial-text">"Los precios son muy competitivos y la calidad supera las expectativas. El comprobante de pago detallado y el sistema de seguimiento me dan mucha confianza."</p>
-              <div class="testimonial-author">
-                <img src="/src/assets/img/gallery/author-3.png" alt="Ana Rodríguez" class="testimonial-avatar">
-                <div class="testimonial-info">
-                  <h6 class="testimonial-name">Ana Rodríguez</h6>
-                  <span class="testimonial-role">Cliente verificada</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== INSTAGRAM FEED SECTION ========== -->
-    <section class="instagram-section py-5">
-      <div class="container">
-        <div class="row text-center mb-4">
-          <div class="col-12">
-            <h2 class="section-title fw-bold">Síguenos en Instagram</h2>
-            <p class="section-subtitle text-muted">@tiendaropa_oficial</p>
-          </div>
-        </div>
-        <div class="row g-2">
-          <div class="col-4 col-md-2">
-            <div class="instagram-item">
-              <img src="/src/assets/img/gallery/shirt-1.png" alt="Instagram" class="instagram-image">
-              <div class="instagram-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 col-md-2">
-            <div class="instagram-item">
-              <img src="/src/assets/img/gallery/shoe-1.png" alt="Instagram" class="instagram-image">
-              <div class="instagram-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 col-md-2">
-            <div class="instagram-item">
-              <img src="/src/assets/img/gallery/sunglass-1.png" alt="Instagram" class="instagram-image">
-              <div class="instagram-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 col-md-2">
-            <div class="instagram-item">
-              <img src="/src/assets/img/gallery/bagpacks-1.png" alt="Instagram" class="instagram-image">
-              <div class="instagram-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 col-md-2">
-            <div class="instagram-item">
-              <img src="/src/assets/img/gallery/watch-1.png" alt="Instagram" class="instagram-image">
-              <div class="instagram-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="col-4 col-md-2">
-            <div class="instagram-item">
-              <img src="/src/assets/img/gallery/tie.png" alt="Instagram" class="instagram-image">
-              <div class="instagram-overlay">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ========== NEWSLETTER SECTION ========== -->
     <section class="newsletter-section py-5">
       <div class="container">
@@ -499,11 +224,11 @@ import ProductGallery from '@/components/ProductGallery.vue'
 }
 
 .bg-holder.overlay-light::before {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .bg-light-gradient {
-  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fdfdff 100%);
 }
 
 .bg-dark-gradient {
@@ -513,6 +238,11 @@ import ProductGallery from '@/components/ProductGallery.vue'
 .card-span {
   position: relative;
   overflow: hidden;
+}
+
+#header {
+  background: rgba(85, 65, 155, 0.75);
+  padding: 40px 0 !important;
 }
 
 .card-img-overlay {
@@ -540,7 +270,7 @@ import ProductGallery from '@/components/ProductGallery.vue'
 
 /* ========== FEATURES SECTION ========== */
 .features-section {
-  background: #f8f9fa;
+  background: #5a8dd4;
 }
 
 .feature-card {

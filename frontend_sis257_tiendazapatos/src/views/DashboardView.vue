@@ -45,7 +45,7 @@ const navigateTo = (route: string) => {
 <template>
   <div class="dashboard-wrapper">
     <DashboardHeader />
-    
+
     <div class="dashboard-container">
       <div class="container-fluid px-5 py-5">
         <!-- Header -->
@@ -56,9 +56,9 @@ const navigateTo = (route: string) => {
 
       <!-- Dashboard Grid -->
       <div class="dashboard-grid">
-        <div 
-          v-for="item in menuItems" 
-          :key="item.route" 
+        <div
+          v-for="item in menuItems"
+          :key="item.route"
           class="dashboard-module"
           @click="navigateTo(item.route)"
         >
@@ -82,7 +82,7 @@ const navigateTo = (route: string) => {
 
 .dashboard-wrapper {
   min-height: 100vh;
-  background: #ffffff;
+  background: linear-gradient(180deg, #eaf6ff 0%, #c2d8ff 100%);
 }
 
 .dashboard-container {
@@ -120,13 +120,13 @@ const navigateTo = (route: string) => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1px;
-  background: #e5e5e5;
-  border: 1px solid #e5e5e5;
+  background: rgba(234,246,255,0.6);
+  border: 1px solid rgba(194,216,255,0.5);
   margin-top: 40px;
 }
 
 .dashboard-module {
-  background: #ffffff;
+  background: rgba(234,246,255,0.95);
   padding: 60px 40px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -135,10 +135,12 @@ const navigateTo = (route: string) => {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(11,53,80,0.08);
 }
 
 .dashboard-module:hover {
-  background: #fafafa;
+  background: rgba(234,246,255,1);
 }
 
 .dashboard-module:hover .module-arrow {

@@ -96,9 +96,9 @@ const toggleVista = () => {
           <!-- Resumen visual con miniaturas -->
           <div class="compact-summary">
             <div class="thumbnails-row">
-              <div 
-                v-for="item in thumbnailsVisibles" 
-                :key="item.id" 
+              <div
+                v-for="item in thumbnailsVisibles"
+                :key="item.id"
                 class="thumbnail-item"
               >
                 <img :src="item.imagen" :alt="item.nombre" />
@@ -109,7 +109,7 @@ const toggleVista = () => {
                 +{{ itemsExtra }}
               </div>
             </div>
-            
+
             <div class="compact-info">
               <div class="compact-info-row">
                 <p class="compact-count">
@@ -230,11 +230,11 @@ const toggleVista = () => {
   width: 100%;
   max-width: 420px;
   max-height: 100vh;
-  background: #ffffff;
+  background: #eaf5ff;
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: -2px 0 30px rgba(15, 23, 42, 0.12);
 }
 
 /* Header */
@@ -243,15 +243,15 @@ const toggleVista = () => {
   justify-content: space-between;
   align-items: center;
   padding: 30px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #dbeaf9;
 }
 
-.cart-title {
+..cart-title {
   font-size: 1.25rem;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #000000;
+  color: #0d3766;
   margin: 0;
 }
 
@@ -259,7 +259,7 @@ const toggleVista = () => {
   background: none;
   border: none;
   cursor: pointer;
-  color: #666666;
+  color: #0d3766;
   padding: 0;
   width: 32px;
   height: 32px;
@@ -315,8 +315,9 @@ const toggleVista = () => {
 }
 
 .compact-summary {
-  background: #f8f8f8;
-  border-radius: 12px;
+  background: #f4fbff;
+  border: 1px solid #dbeaf9;
+  border-radius: 18px;
   padding: 24px;
   text-align: center;
 }
@@ -335,8 +336,8 @@ const toggleVista = () => {
   height: 75px;
   border-radius: 6px;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #f4fbff;
+  box-shadow: 0 10px 30px rgba(14, 42, 96, 0.08);
 }
 
 .thumbnail-item img {
@@ -365,13 +366,13 @@ const toggleVista = () => {
   width: 60px;
   height: 75px;
   border-radius: 6px;
-  background: #e0e0e0;
+  background: #dbeaf9;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #666;
+  color: #0d3766;
 }
 
 .compact-info {
@@ -408,11 +409,11 @@ const toggleVista = () => {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 12px;
-  background: transparent;
-  border: 1px solid #ccc;
+  padding: 8px 14px;
+  background: #eff7ff;
+  border: 1px solid #dbeaf9;
   border-radius: 20px;
-  color: #666;
+  color: #0d3766;
   font-size: 0.75rem;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -420,9 +421,9 @@ const toggleVista = () => {
 }
 
 .btn-ver-detalles:hover {
-  background: #fff;
-  border-color: #000;
-  color: #000;
+  background: #dbeaf9;
+  border-color: #b8d7f1;
+  color: #0d3766;
 }
 
 .btn-toggle-view {
@@ -432,23 +433,23 @@ const toggleVista = () => {
   gap: 8px;
   width: 100%;
   padding: 14px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  color: #333;
+  background: #f4fbff;
+  border: 1px solid #dbeaf9;
+  border-radius: 12px;
+  color: #0d3766;
   font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-toggle-view:hover {
-  background: #f5f5f5;
-  border-color: #ccc;
+  background: #e6f2ff;
+  border-color: #c9e1f8;
 }
 
 .btn-toggle-view.compact-btn {
   margin-bottom: 20px;
-  background: #f8f8f8;
+  background: #eff7ff;
 }
 
 /* ========== VISTA EXPANDIDA (Lista) ========== */
@@ -465,21 +466,22 @@ const toggleVista = () => {
   grid-template-columns: 70px 1fr auto;
   gap: 12px;
   position: relative;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 18px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #dbeaf9;
 }
 
 .cart-item:last-of-type {
-  border-bottom: none;
-  padding-bottom: 0;
+  padding-bottom: 18px;
 }
 
 .item-image {
   width: 70px;
   height: 85px;
-  background: #fafafa;
+  background: #eef6ff;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 16px;
 }
 
 .item-image img {
@@ -540,9 +542,9 @@ const toggleVista = () => {
 .qty-btn {
   width: 24px;
   height: 24px;
-  border: 1px solid #e5e5e5;
-  background: #ffffff;
-  color: #000000;
+  border: 1px solid #dbeaf9;
+  background: #eef6ff;
+  color: #0d3766;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -584,9 +586,9 @@ const toggleVista = () => {
 
 /* Footer */
 .cart-footer {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #dbeaf9;
   padding: 24px 30px;
-  background: #fafafa;
+  background: #f4fbff;
 }
 
 .cart-summary {
@@ -666,8 +668,8 @@ const toggleVista = () => {
 .btn-clear {
   width: 100%;
   background: transparent;
-  color: #666666;
-  border: 1px solid #e5e5e5;
+  color: #0d3766;
+  border: 1px solid #dbeaf9;
   padding: 14px;
   font-size: 0.8125rem;
   letter-spacing: 0.5px;
@@ -710,11 +712,11 @@ const toggleVista = () => {
   .cart-header {
     padding: 20px;
   }
-  
+
   .cart-content {
     padding: 16px;
   }
-  
+
   .cart-footer {
     padding: 20px;
   }
@@ -732,11 +734,11 @@ const toggleVista = () => {
     width: 60px;
     height: 75px;
   }
-  
+
   .item-name {
     font-size: 0.8125rem;
   }
-  
+
   .item-bottom {
     flex-direction: column;
     align-items: flex-start;

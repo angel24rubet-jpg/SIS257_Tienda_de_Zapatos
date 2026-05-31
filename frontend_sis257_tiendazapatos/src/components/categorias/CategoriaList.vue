@@ -13,7 +13,7 @@ const busqueda = ref('')
 const categoriasFiltradas = computed(() => {
   if (!busqueda.value.trim()) return categorias.value
   const termino = busqueda.value.toLowerCase().trim()
-  return categorias.value.filter(cat => 
+  return categorias.value.filter(cat =>
     cat.nombre.toLowerCase().includes(termino) ||
     cat.id.toString().includes(termino)
   )
@@ -87,10 +87,10 @@ onMounted(() => {
           <circle cx="11" cy="11" r="8"/>
           <path d="m21 21-4.35-4.35"/>
         </svg>
-        <input 
+        <input
           v-model="busqueda"
-          type="text" 
-          class="search-input" 
+          type="text"
+          class="search-input"
           placeholder="Buscar categoría..."
         />
         <button v-if="busqueda" @click="busqueda = ''" class="search-clear">
@@ -155,7 +155,7 @@ onMounted(() => {
           </tr>
         </tbody>
       </table>
-      
+
       <!-- Contador de registros abajo a la derecha -->
       <div class="table-footer">
         <span class="records-count">
@@ -175,54 +175,62 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Container */
+<style scoped>
 .list-container {
-  background: #ffffff;
+  background: linear-gradient(180deg, rgba(235, 246, 255, 0.98), rgba(221, 236, 255, 0.9));
   min-height: calc(100vh - 140px);
+  padding: 26px 28px 32px;
 }
 
-/* Header */
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 30px 0;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 0;
+  padding: 28px 30px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 50px rgba(32, 86, 171, 0.09);
+  border: 1px solid rgba(94, 129, 255, 0.14);
+  gap: 24px;
+  margin-bottom: 22px;
 }
 
 .page-title {
-  font-size: 1.75rem;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  color: #000;
-  margin-bottom: 6px;
+  font-size: 2.05rem;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  color: #13315f;
+  margin-bottom: 10px;
 }
 
 .page-subtitle {
-  font-size: 0.875rem;
-  color: #888;
+  font-size: 0.95rem;
+  color: #4c6c8c;
+  letter-spacing: 0.3px;
   margin: 0;
 }
 
 .btn-action {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, #000 0%, #333 100%);
-  color: #fff;
+  gap: 10px;
+  background: linear-gradient(135deg, #9ac5ff 0%, #7198ff 100%);
+  color: #0e2f68;
   border: none;
-  padding: 12px 24px;
-  font-size: 0.875rem;
-  font-weight: 500;
+  padding: 14px 32px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(81, 111, 229, 0.18);
 }
 
 .btn-action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 16px 34px rgba(56, 98, 212, 0.24);
+  background: linear-gradient(135deg, #80a8ff 0%, #5178ed 100%);
 }
 
 .btn-action svg {
@@ -235,68 +243,76 @@ onMounted(() => {
 
 /* Search Bar */
 .search-bar {
-  padding: 20px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 22px 0 20px;
 }
 
 .search-input-wrapper {
   position: relative;
-  max-width: 350px;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(94, 129, 255, 0.18);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .search-icon {
   position: absolute;
-  left: 14px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
+  color: #7b8ca7;
   pointer-events: none;
 }
 
 .search-input {
   width: 100%;
-  height: 44px;
-  padding: 0 40px 0 44px;
-  border: 1px solid #e5e5e5;
-  font-size: 0.9rem;
-  color: #333;
-  background: #fafafa;
+  height: 48px;
+  padding: 0 42px 0 48px;
+  border: none;
+  font-size: 0.95rem;
+  color: #25324d;
+  background: transparent;
   transition: all 0.2s ease;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #000;
-  background: #fff;
+  box-shadow: 0 0 0 4px rgba(93, 146, 255, 0.12);
 }
 
 .search-input::placeholder {
-  color: #aaa;
+  color: #98a6bf;
 }
 
 .search-clear {
   position: absolute;
-  right: 8px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: rgba(94, 129, 255, 0.1);
   border: none;
-  color: #999;
+  color: #3859a1;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .search-clear:hover {
-  color: #333;
+  background: rgba(94, 129, 255, 0.18);
+  color: #1f3d7d;
 }
 
 /* Table */
 .table-wrapper {
   overflow-x: auto;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(94, 129, 255, 0.14);
+  box-shadow: 0 22px 50px rgba(32, 86, 171, 0.08);
 }
 
 .data-table {
@@ -306,39 +322,40 @@ onMounted(() => {
 }
 
 .data-table thead {
-  background: #fafafa;
+  background: linear-gradient(135deg, rgba(219, 233, 255, 0.98), rgba(200, 222, 255, 0.98));
 }
 
 .data-table th {
-  padding: 14px 20px;
+  padding: 18px 22px;
   text-align: left;
-  font-weight: 600;
-  font-size: 0.7rem;
-  color: #888;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #3b5374;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  border-bottom: 2px solid #e5e5e5;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(32, 86, 171, 0.1);
 }
 
 .data-table tbody tr {
-  border-bottom: 1px solid #f0f0f0;
-  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(32, 86, 171, 0.08);
+  transition: all 0.25s ease;
 }
 
 .data-table tbody tr:hover {
-  background: linear-gradient(90deg, #fafafa 0%, #fff 100%);
-  transform: scale(1.002);
+  background: rgba(93, 146, 255, 0.12);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(32, 86, 171, 0.08);
 }
 
 .data-table td {
-  padding: 16px 20px;
-  color: #333;
+  padding: 18px 22px;
+  color: #1f2f47;
   vertical-align: middle;
 }
 
 .data-table td.fw-medium {
-  font-weight: 500;
-  color: #000;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
 /* ID Badge */
@@ -346,53 +363,56 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 28px;
-  padding: 0 10px;
-  background: #f5f5f5;
-  color: #666;
+  min-width: 42px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
   font-size: 0.75rem;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 20px;
 }
 
 /* Action Buttons */
 .actions-cell {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 10px;
 }
 
 .btn-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid #e5e5e5;
-  background: #fff;
-  color: #666;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 6px;
+  transition: all 0.25s ease;
 }
 
-.btn-icon:hover {
-  border-color: transparent;
+.btn-edit {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #1976d2;
 }
 
 .btn-edit:hover {
-  background: #000;
-  color: #fff;
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  color: #d32f2f;
 }
 
 .btn-delete:hover {
-  background: #dc3545;
-  color: #fff;
+  background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(220,53,69,0.3);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
 }
 
 /* Empty State */
@@ -405,15 +425,15 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  color: #999;
 }
 
 .empty-content svg {
-  opacity: 0.3;
+  color: #bdbdbd;
 }
 
 .empty-content p {
-  font-size: 0.9rem;
+  color: #757575;
+  font-size: 1rem;
   margin: 0;
 }
 
@@ -422,8 +442,8 @@ onMounted(() => {
   display: flex;
   justify-content: flex-end;
   padding: 16px 20px;
-  border-top: 1px solid #f0f0f0;
-  background: #fafafa;
+  border-top: 1px solid rgba(32,86,171,0.12);
+  background: rgba(234,246,255,0.75);
 }
 
 .records-count {
@@ -438,19 +458,19 @@ onMounted(() => {
     gap: 20px;
     align-items: stretch;
   }
-  
+
   .btn-action {
     width: 100%;
     justify-content: center;
   }
-  
+
   .page-title {
     font-size: 1.5rem;
   }
-  
+
   .actions-cell {
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
 }
 </style>
