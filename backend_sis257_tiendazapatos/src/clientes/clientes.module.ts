@@ -12,4 +12,3 @@ import { Cliente } from './entities/cliente.entity';
 })
 export class ClientesModule {}
 
-
