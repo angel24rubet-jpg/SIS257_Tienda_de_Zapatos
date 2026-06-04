@@ -7,7 +7,6 @@ Bienvenido al sistema **Tienda de Zapatos Ramos**, una aplicación diseñada par
 ## 📌 Descripción
 
 Este sistema permite administrar una tienda de calzados de manera eficiente, controlando productos, clientes, ventas e inventario en una sola plataforma.
-
 ---
 
 ## ⚙️ Funcionalidades
