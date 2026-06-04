@@ -5,10 +5,15 @@ const carritoStore = useCarritoStore()
 </script>
 
 <template>
-  <button @click="carritoStore.abrirCarrito()" class="cart-widget">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-    </svg>
+  <button @click="carritoStore.abrirCarrito()" class="cart-widget" aria-label="Abrir carrito">
+    <span class="cart-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 6h15l-1.5 9h-12L4 4H2" />
+        <circle cx="9" cy="20" r="1.5" />
+        <circle cx="18" cy="20" r="1.5" />
+        <path d="M6 6L7.5 3h11" />
+      </svg>
+    </span>
     <Transition name="badge">
       <span v-if="carritoStore.cantidadTotal > 0" class="cart-badge">
         {{ carritoStore.cantidadTotal }}
@@ -20,47 +25,58 @@ const carritoStore = useCarritoStore()
 <style scoped>
 .cart-widget {
   position: relative;
-  background: none;
-  border: none;
-  color: #000000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0b3550;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
   cursor: pointer;
-  padding: 8px;
-  display: flex;
+  padding: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cart-widget:hover {
-  opacity: 0.6;
+  transform: scale(1.03);
+  background: #0d4165;
+  box-shadow: 0 4px 12px rgba(11, 53, 80, 0.18);
+}
+
+.cart-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .cart-badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
-  background: #000000;
+  top: -4px;
+  right: -4px;
+  background: #ff5a5f;
   color: #ffffff;
-  font-size: 0.625rem;
-  font-weight: 400;
-  min-width: 18px;
-  height: 18px;
-  border-radius: 9px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 5px;
+  padding: 0 6px;
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.12);
 }
 
 /* Badge Animation */
 .badge-enter-active,
 .badge-leave-active {
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
 }
 
 .badge-enter-from {
   opacity: 0;
-  transform: scale(0.5);
+  transform: scale(0.35);
 }
 
 .badge-leave-to {

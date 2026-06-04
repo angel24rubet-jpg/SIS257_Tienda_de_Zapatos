@@ -48,9 +48,14 @@ export class AuthService {
         // Determinar el rol (admin o cliente)
         const rolFinal = rol || 'cliente';
 
+        // Hash la contraseña MANUALMENTE antes de crear el usuario
+        const claveAHashear = clave ?? (process.env.DEFAULT_PASSWORD ?? '');
+        const salt = await bcrypt.genSalt();
+        const claveHasheada = await bcrypt.hash(claveAHashear, salt);
+
         const nuevoUsuario = usuarioRepo.create({ 
           nombreUsuario: nombreUsuario.trim(), 
-          clave: clave ?? (process.env.DEFAULT_PASSWORD ?? ''),
+          clave: claveHasheada,
           rol: rolFinal
         });
         const usuarioGuardado = await usuarioRepo.save(nuevoUsuario);

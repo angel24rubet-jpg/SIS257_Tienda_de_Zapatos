@@ -12,6 +12,7 @@ interface Producto {
   precio: number
   stock: number
   talla: string
+  tallas: string[]
   color: string
   imagenes: string
   genero: string
@@ -31,6 +32,9 @@ const categorias = ref<Categoria[]>([])
 const categoriaSeleccionada = ref<string | null>(null)
 const generoSeleccionado = ref<string | null>(null)
 const loading = ref(true)
+const mostrarModalTalla = ref(false)
+const productoSeleccionado = ref<Producto | null>(null)
+const tallasSeleccionadas = ref<string[]>([])
 
 const productosFiltrados = computed(() => {
   let resultado = productos.value
@@ -91,15 +95,48 @@ const seleccionarGenero = (genero: string | null) => {
 }
 
 const agregarAlCarrito = (producto: Producto) => {
-  carritoStore.agregarItem({
-    id: producto.id,
-    nombre: producto.nombre,
-    precio: Number(producto.precio),
-    talla: producto.talla,
-    color: producto.color,
-    imagenes: producto.imagenes,
-    stock: Number(producto.stock)
+  productoSeleccionado.value = producto
+  tallasSeleccionadas.value = []
+  mostrarModalTalla.value = true
+}
+
+const toggleTalla = (talla: string) => {
+  const index = tallasSeleccionadas.value.indexOf(talla)
+  if (index === -1) {
+    tallasSeleccionadas.value.push(talla)
+  } else {
+    tallasSeleccionadas.value.splice(index, 1)
+  }
+}
+
+const confirmarAgregarAlCarrito = () => {
+  if (!productoSeleccionado.value || tallasSeleccionadas.value.length === 0) {
+    alert('Por favor selecciona al menos una talla')
+    return
+  }
+
+  // Agregar un item al carrito por cada talla seleccionada
+  tallasSeleccionadas.value.forEach(talla => {
+    carritoStore.agregarItem({
+      id: productoSeleccionado.value!.id,
+      nombre: productoSeleccionado.value!.nombre,
+      precio: Number(productoSeleccionado.value!.precio),
+      talla: talla,
+      color: productoSeleccionado.value!.color,
+      imagenes: productoSeleccionado.value!.imagenes,
+      stock: Number(productoSeleccionado.value!.stock)
+    })
   })
+
+  mostrarModalTalla.value = false
+  productoSeleccionado.value = null
+  tallasSeleccionadas.value = []
+}
+
+const cerrarModalTalla = () => {
+  mostrarModalTalla.value = false
+  productoSeleccionado.value = null
+  tallasSeleccionadas.value = []
 }
 
 onMounted(() => {
@@ -209,6 +246,57 @@ onMounted(() => {
         <p class="empty-message">{{ (categoriaSeleccionada || generoSeleccionado) ? 'No hay productos con los filtros seleccionados' : 'La colección estará disponible próximamente' }}</p>
       </div>
     </div>
+
+    <!-- Modal de Selección de Talla -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="mostrarModalTalla && productoSeleccionado" class="modal-overlay" @click.self="cerrarModalTalla">
+          <div class="modal-container">
+            <div class="modal-header">
+              <h2 class="modal-title">Seleccionar Talla</h2>
+              <button @click="cerrarModalTalla" class="modal-close" type="button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="producto-info-modal">
+                <img :src="productoSeleccionado.imagenes" :alt="productoSeleccionado.nombre" class="modal-imagen" />
+                <div class="modal-detalles">
+                  <h3>{{ productoSeleccionado.nombre }}</h3>
+                  <p class="modal-precio">{{ Number(productoSeleccionado.precio).toFixed(2) }} Bs</p>
+                  <p class="modal-color">Color: {{ productoSeleccionado.color }}</p>
+                </div>
+              </div>
+
+              <div class="tallas-selector">
+                <label class="label-talla">Elige las tallas que deseas comprar:</label>
+                <div class="tallas-grid">
+                  <button
+                    v-for="talla in productoSeleccionado.tallas"
+                    :key="talla"
+                    type="button"
+                    class="talla-option"
+                    :class="{ selected: tallasSeleccionadas.includes(talla) }"
+                    @click="toggleTalla(talla)"
+                  >
+                    {{ talla }}
+                  </button>
+                </div>
+                <p class="tallas-count">{{ tallasSeleccionadas.length }} talla{{ tallasSeleccionadas.length !== 1 ? 's' : '' }} seleccionada{{ tallasSeleccionadas.length !== 1 ? 's' : '' }}</p>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button @click="cerrarModalTalla" class="btn-cancelar">Cancelar</button>
+              <button @click="confirmarAgregarAlCarrito" class="btn-confirmar">Agregar al carrito</button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </section>
 </template>
 
@@ -558,5 +646,215 @@ onMounted(() => {
   .product-image-container {
     max-height: 280px;
   }
+}
+
+/* Modal de Selección de Talla */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.modal-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999999;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: #000000;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.producto-info-modal {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-imagen {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.modal-detalles h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+}
+
+.modal-precio {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+  margin: 0 0 4px 0;
+}
+
+.modal-color {
+  font-size: 0.875rem;
+  color: #666666;
+  margin: 0;
+}
+
+.tallas-selector {
+  margin-bottom: 24px;
+}
+
+.label-talla {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.tallas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 10px;
+}
+
+.talla-option {
+  padding: 12px 8px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  color: #666666;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.talla-option:hover {
+  border-color: #999999;
+  color: #000000;
+}
+
+.talla-option.selected {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.tallas-count {
+  font-size: 0.8rem;
+  color: #666666;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #f0f0f0;
+  justify-content: flex-end;
+}
+
+.btn-cancelar {
+  padding: 10px 24px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+  color: #666666;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover {
+  border-color: #999999;
+  color: #000000;
+}
+
+.btn-confirmar {
+  padding: 10px 24px;
+  border: none;
+  background: #000000;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-confirmar:hover {
+  background: #333333;
+}
+
+/* Animaciones del modal */
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .modal-container,
+.modal-leave-active .modal-container {
+  transition: transform 0.3s ease;
+}
+
+.modal-enter-from .modal-container {
+  transform: scale(0.95);
+}
+
+.modal-leave-to .modal-container {
+  transform: scale(0.95);
 }
 </style>

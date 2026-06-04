@@ -86,6 +86,17 @@ export class VentasController {
     return this.ventasService.cambiarEstadoVenta(id, estado);
   }
 
+  @Patch(':id/recibido')
+  @UseGuards(AuthGuard('jwt'))
+  @ApiResponse({ status: 200, description: 'Pedido marcado como recibido por el cliente' })
+  async marcarRecibido(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req: any,
+  ): Promise<Venta> {
+    const usuario = req.user;
+    return this.ventasService.marcarVentaEntregada(id, usuario.id);
+  }
+
   @Patch(':id/soft-remove')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles('admin')

@@ -39,7 +39,7 @@ export class Usuario {
   @BeforeUpdate()
   async hashPassword() {
     // Solo hashear si la clave fue modificada y no está ya hasheada
-    if (this.clave && !this.clave.startsWith('$2')) {
+    if (this.clave && !this.clave.startsWith('$2a') && !this.clave.startsWith('$2b') && !this.clave.startsWith('$2x') && !this.clave.startsWith('$2y')) {
       const salt = await bcrypt.genSalt();
       this.clave = await bcrypt.hash(this.clave, salt);
     }

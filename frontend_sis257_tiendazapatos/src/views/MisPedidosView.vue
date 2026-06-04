@@ -49,9 +49,9 @@ const cargarPedidos = async () => {
   try {
     cargando.value = true
     error.value = ''
-    
+
     const { data } = await http.get('ventas/mis-pedidos')
-    pedidos.value = data.sort((a: Venta, b: Venta) => 
+    pedidos.value = data.sort((a: Venta, b: Venta) =>
       new Date(b.fechaCreacion).getTime() - new Date(a.fechaCreacion).getTime()
     )
   } catch (err: any) {
@@ -159,6 +159,22 @@ const getEstadoLabel = (estado: string) => {
   }
   return labels[estado] || estado
 }
+
+const confirmarEntrega = async (pedido: Venta) => {
+  try {
+    if (!confirm(`¿Deseas confirmar que recibiste el pedido #${pedido.id}?`)) {
+      return
+    }
+
+    await http.patch(`ventas/${pedido.id}/recibido`)
+    await cargarPedidos()
+    alert('Gracias. El estado de tu pedido ahora aparece como entregado.')
+  } catch (err: any) {
+    console.error('Error al confirmar entrega:', err)
+    const mensaje = err?.response?.data?.message || 'No se pudo actualizar el estado del pedido.'
+    alert(mensaje)
+  }
+}
 </script>
 
 <template>
@@ -198,9 +214,9 @@ const getEstadoLabel = (estado: string) => {
 
       <!-- Lista de pedidos -->
       <div v-else class="pedidos-list">
-        <div 
-          v-for="pedido in pedidos" 
-          :key="pedido.id" 
+        <div
+          v-for="pedido in pedidos"
+          :key="pedido.id"
           class="pedido-card"
           :class="{ expanded: pedidoExpandido === pedido.id, 'pedido-anulado': pedido.estado === 'anulada' }"
         >
@@ -220,11 +236,11 @@ const getEstadoLabel = (estado: string) => {
               <span class="pedido-total">{{ Number(pedido.totalVenta).toFixed(2) }} Bs</span>
             </div>
             <div class="pedido-toggle">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="20" 
-                height="20" 
-                fill="currentColor" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
                 viewBox="0 0 16 16"
                 :class="{ rotated: pedidoExpandido === pedido.id }"
               >
@@ -235,7 +251,7 @@ const getEstadoLabel = (estado: string) => {
 
           <!-- Detalles del pedido -->
           <div v-if="pedidoExpandido === pedido.id" class="pedido-detalles">
-            
+
             <!-- TRACKING TIMELINE -->
             <div v-if="pedido.estado !== 'anulada'" class="tracking-section">
               <h4 class="tracking-title">
@@ -244,7 +260,7 @@ const getEstadoLabel = (estado: string) => {
                 </svg>
                 Seguimiento del Pedido
               </h4>
-              
+
               <!-- Número de seguimiento si existe -->
               <div v-if="pedido.numeroSeguimiento" class="tracking-number">
                 <span class="label">N° de Seguimiento:</span>
@@ -253,8 +269,8 @@ const getEstadoLabel = (estado: string) => {
 
               <!-- Timeline de estados -->
               <div class="tracking-timeline">
-                <div 
-                  v-for="(paso, index) in estadosPedido" 
+                <div
+                  v-for="(paso, index) in estadosPedido"
                   :key="paso.key"
                   class="timeline-step"
                   :class="{
@@ -265,13 +281,13 @@ const getEstadoLabel = (estado: string) => {
                 >
                   <!-- Línea conectora -->
                   <div v-if="index > 0" class="timeline-line" :class="{ 'line-completed': isPasoCompletado(pedido, paso.key) }"></div>
-                  
+
                   <!-- Círculo del paso -->
                   <div class="step-circle">
                     <span v-if="isPasoCompletado(pedido, paso.key) && !isPasoActual(pedido, paso.key)" class="step-check">✓</span>
                     <span v-else class="step-icon">{{ paso.icon }}</span>
                   </div>
-                  
+
                   <!-- Info del paso -->
                   <div class="step-info">
                     <span class="step-label">{{ paso.label }}</span>
@@ -305,6 +321,12 @@ const getEstadoLabel = (estado: string) => {
                   <span>¡Pedido entregado! Gracias por tu compra.</span>
                 </template>
               </div>
+
+              <div v-if="pedido.estado === 'enviado'" class="confirm-delivery-row">
+                <button @click.prevent="confirmarEntrega(pedido)" class="btn-confirm-received">
+                  Confirmar que recibí el pedido
+                </button>
+              </div>
             </div>
 
             <!-- Mensaje de pedido anulado -->
@@ -319,13 +341,13 @@ const getEstadoLabel = (estado: string) => {
             <!-- Productos -->
             <div class="detalles-productos">
               <h4 class="productos-title">Productos del pedido</h4>
-              <div 
-                v-for="detalle in pedido.ventadetalles" 
-                :key="detalle.id" 
+              <div
+                v-for="detalle in pedido.ventadetalles"
+                :key="detalle.id"
                 class="detalle-item"
               >
-                <img 
-                  :src="detalle.producto?.imagenes || '/placeholder.jpg'" 
+                <img
+                  :src="detalle.producto?.imagenes || '/placeholder.jpg'"
                   :alt="detalle.producto?.nombre"
                   class="detalle-imagen"
                 />
@@ -767,6 +789,28 @@ const getEstadoLabel = (estado: string) => {
 .tracking-message span:last-child {
   color: #333;
   font-size: 0.9rem;
+}
+
+.confirm-delivery-row {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-confirm-received {
+  background: #2d7ef7;
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-confirm-received:hover {
+  background: #235dc4;
+  transform: translateY(-1px);
 }
 
 /* Mensaje anulado */

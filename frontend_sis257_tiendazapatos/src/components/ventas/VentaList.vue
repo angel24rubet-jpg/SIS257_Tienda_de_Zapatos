@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, onUnmounted, ref, computed } from 'vue'
 import http from '@/plugins/axios'
 import VentaDetalle from './VentaDetalle.vue'
 
@@ -42,6 +42,18 @@ const loading = ref(true)
 const ventaSeleccionada = ref<Venta | null>(null)
 const busqueda = ref('')
 const openDropdownId = ref<number | null>(null)
+const showChangeStateModal = ref(false)
+const ventaParaCambiarEstado = ref<Venta | null>(null)
+const selectedStatus = ref<string | null>(null)
+
+const estadoOptions = [
+  { value: 'pendiente', label: 'Pendiente', description: 'Pedido recibido y pendiente de proceso' },
+  { value: 'confirmado', label: 'En Proceso', description: 'Pago confirmado y pedido en preparación' },
+  { value: 'en_preparacion', label: 'En Preparación', description: 'Pedido en embalaje antes de enviarse' },
+  { value: 'enviado', label: 'Enviado', description: 'Pedido en tránsito hacia el cliente' },
+  { value: 'entregado', label: 'Entregado', description: 'Pedido entregado al cliente' },
+  { value: 'anulada', label: 'Anulada', description: 'Pedido cancelado' },
+]
 
 // Filtrar ventas por búsqueda
 const ventasFiltradas = computed(() => {
@@ -147,6 +159,8 @@ const cambiarEstado = async (venta: Venta, nuevoEstado: string) => {
     await http.patch(`ventas/${venta.id}/estado`, { estado: nuevoEstado })
     // recargar lista
     await cargarVentas()
+    openDropdownId.value = null
+    cerrarModalCambiarEstado()
     alert('Estado actualizado correctamente')
   } catch (err: any) {
     console.error('Error actualizando estado:', err)
@@ -161,17 +175,43 @@ const toggleDropdown = (id: number) => {
   openDropdownId.value = openDropdownId.value === id ? null : id
 }
 
-// Cerrar dropdown si clic fuera
-if (typeof window !== 'undefined') {
-  window.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement
-    if (!target.closest('.status-dropdown')) {
-      openDropdownId.value = null
-    }
-  })
+const abrirModalCambiarEstado = (venta: Venta) => {
+  console.log('abrirModalCambiarEstado', venta.id)
+  ventaParaCambiarEstado.value = venta
+  selectedStatus.value = venta.estado
+  showChangeStateModal.value = true
 }
 
-onMounted(() => cargarVentas())
+const cerrarModalCambiarEstado = () => {
+  showChangeStateModal.value = false
+  ventaParaCambiarEstado.value = null
+  selectedStatus.value = null
+}
+
+const manejarEstadoActualizado = () => {
+  cargarVentas()
+  cerrarModalCambiarEstado()
+}
+
+const cerrarDropdownSiFuera = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  if (!target.closest('.status-dropdown')) {
+    openDropdownId.value = null
+  }
+}
+
+onMounted(() => {
+  cargarVentas()
+  if (typeof window !== 'undefined') {
+    window.addEventListener('click', cerrarDropdownSiFuera)
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('click', cerrarDropdownSiFuera)
+  }
+})
 </script>
 
 <template>
@@ -296,35 +336,16 @@ onMounted(() => cargarVentas())
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                     <circle cx="12" cy="12" r="3"/>
                   </svg>
+                  <span class="btn-label">Ver</span>
                 </button>
-                <div :class="['status-dropdown', { open: openDropdownId === venta.id }]">
-                  <button @click.stop="toggleDropdown(venta.id)" class="btn-icon btn-status" title="Cambiar estado">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="1"/>
-                      <circle cx="19" cy="12" r="1"/>
-                      <circle cx="5" cy="12" r="1"/>
-                    </svg>
-                  </button>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-header">Cambiar estado</div>
-                    <button v-if="venta.estado === 'pendiente'" @click.prevent="cambiarEstado(venta, 'confirmado')">
-                      <span class="dropdown-dot confirmed"></span> Confirmar pago
-                    </button>
-                    <button v-if="venta.estado === 'confirmado'" @click.prevent="cambiarEstado(venta, 'en_preparacion')">
-                      <span class="dropdown-dot preparation"></span> En preparación
-                    </button>
-                    <button v-if="venta.estado === 'en_preparacion'" @click.prevent="cambiarEstado(venta, 'enviado')">
-                      <span class="dropdown-dot shipped"></span> Marcar enviado
-                    </button>
-                    <button v-if="venta.estado === 'enviado'" @click.prevent="cambiarEstado(venta, 'entregado')">
-                      <span class="dropdown-dot success"></span> Marcar entregado
-                    </button>
-                    <div class="dropdown-divider" v-if="venta.estado !== 'anulada' && venta.estado !== 'entregado'"></div>
-                    <button v-if="venta.estado !== 'anulada' && venta.estado !== 'entregado'" @click.prevent="cambiarEstado(venta, 'anulada')" class="danger">
-                      <span class="dropdown-dot danger"></span> Anular venta
-                    </button>
-                  </div>
-                </div>
+                <button type="button" @click.stop="abrirModalCambiarEstado(venta)" class="btn-icon btn-status" title="Cambiar estado">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="1"/>
+                    <circle cx="19" cy="12" r="1"/>
+                    <circle cx="5" cy="12" r="1"/>
+                  </svg>
+                  <span class="btn-label">Estado</span>
+                </button>
               </div>
             </td>
           </tr>
@@ -363,6 +384,47 @@ onMounted(() => cargarVentas())
 
     <!-- Modal de Detalle -->
     <VentaDetalle :venta="ventaSeleccionada" @close="cerrarDetalle" />
+
+    <!-- Modal de Cambiar Estado -->
+    <div v-if="showChangeStateModal && ventaParaCambiarEstado" class="modal-overlay" @click.self="cerrarModalCambiarEstado">
+      <div class="modal-container status-modal">
+        <div class="modal-header">
+          <div class="header-content">
+            <h2 class="modal-title">Cambiar Estado de Envío</h2>
+            <p class="order-info">Venta #{{ ventaParaCambiarEstado.id }} - {{ getEstadoLabel(ventaParaCambiarEstado.estado) }}</p>
+          </div>
+          <button @click="cerrarModalCambiarEstado" class="modal-close" type="button">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="status-section">
+            <div class="status-label">Selecciona el nuevo estado</div>
+            <div class="state-options-grid">
+              <button
+                v-for="option in estadoOptions"
+                :key="option.value"
+                type="button"
+                @click="selectedStatus = option.value"
+                :class="['state-option', { selected: selectedStatus === option.value } ]"
+              >
+                <span class="option-label">{{ option.label }}</span>
+                <span class="option-description">{{ option.description }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" @click="cerrarModalCambiarEstado">Cancelar</button>
+          <button
+            type="button"
+            class="btn-primary"
+            :disabled="!selectedStatus"
+            @click="cambiarEstado(ventaParaCambiarEstado, selectedStatus!)"
+          >Cambiar Estado</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -464,6 +526,73 @@ onMounted(() => cargarVentas())
 .search-clear:hover {
   background: rgba(94, 129, 255, 0.18);
   color: #1f3d7d;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 26, 56, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15000;
+  padding: 24px;
+}
+
+.modal-container.status-modal {
+  width: 100%;
+  max-width: 640px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.state-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.state-option {
+  border: 2px solid rgba(94, 129, 255, 0.18);
+  border-radius: 18px;
+  padding: 18px 16px;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.state-option:hover {
+  border-color: rgba(94, 129, 255, 0.45);
+  background: rgba(233, 244, 255, 0.75);
+}
+
+.state-option.selected {
+  border-color: #4a8cff;
+  background: rgba(74, 140, 255, 0.18);
+  box-shadow: 0 10px 30px rgba(74, 140, 255, 0.13);
+}
+
+.state-option .option-label {
+  display: block;
+  font-weight: 700;
+  color: #13315f;
+  margin-bottom: 6px;
+}
+
+.state-option .option-description {
+  display: block;
+  color: #51647b;
+  font-size: 0.88rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 22px 32px 24px;
 }
 
 /* Loading State */
@@ -728,6 +857,9 @@ onMounted(() => cargarVentas())
 
 .actions-cell {
   text-align: center;
+  position: relative;
+  overflow: visible;
+  z-index: 50;
 }
 
 .actions-wrapper {
@@ -735,18 +867,30 @@ onMounted(() => cargarVentas())
   align-items: center;
   justify-content: center;
   gap: 6px;
+  position: relative;
+  overflow: visible;
+  z-index: 50;
 }
 
 .btn-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
+  min-width: 36px;
   height: 36px;
+  gap: 8px;
+  padding: 0 12px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-label {
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 .btn-view {
@@ -772,24 +916,102 @@ onMounted(() => cargarVentas())
 
 .status-dropdown {
   position: relative;
-  z-index: 200;
+  z-index: 300;
+  overflow: visible;
 }
 
 .dropdown-menu {
   position: absolute;
   right: 0;
   top: 100%;
-  margin-top: 4px;
+  margin-top: 8px;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  padding: 8px 0;
-  min-width: 140px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-  z-index: 100;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 4px 0;
+  min-width: 180px;
+  z-index: 9999;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  animation: popupSlideIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-overlay.status-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 26, 56, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10020;
+  padding: 24px;
+}
+
+.modal-container.status-modal {
+  width: 100%;
+  max-width: 620px;
+  border-radius: 28px;
+  box-shadow: 0 24px 80px rgba(16, 48, 112, 0.18);
+  border: 1px solid rgba(94, 129, 255, 0.16);
+}
+
+.state-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.state-option {
+  border: 2px solid rgba(94, 129, 255, 0.18);
+  border-radius: 18px;
+  padding: 18px 16px;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.state-option:hover {
+  border-color: rgba(94, 129, 255, 0.45);
+  background: rgba(233, 244, 255, 0.85);
+}
+
+.state-option.selected {
+  border-color: #4a8cff;
+  background: rgba(74, 140, 255, 0.16);
+  box-shadow: 0 10px 30px rgba(74, 140, 255, 0.15);
+}
+
+.state-option .option-label {
+  display: block;
+  font-weight: 700;
+  color: #13315f;
+  margin-bottom: 6px;
+}
+
+.state-option .option-description {
+  display: block;
+  color: #51647b;
+  font-size: 0.88rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 22px 32px 26px;
 }
 
 .status-dropdown:hover .dropdown-menu,
@@ -800,44 +1022,53 @@ onMounted(() => cargarVentas())
 }
 
 .dropdown-header {
-  padding: 8px 16px 4px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #999;
+  padding: 12px 16px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0b3550;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .dropdown-divider {
   height: 1px;
-  background: #eee;
-  margin: 6px 0;
+  background: #e8e8e8;
+  margin: 8px 0;
 }
 
-.dropdown-menu button {
+.dropdown-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  padding: 8px 16px;
+  padding: 10px 16px;
   background: none;
   border: none;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #333;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  font-weight: 500;
 }
 
-.dropdown-menu button:hover {
-  background: #f5f5f5;
+.dropdown-btn:hover {
+  background: linear-gradient(135deg, rgba(11, 53, 80, 0.05), rgba(94, 129, 255, 0.08));
+  color: #0b3550;
 }
 
-.dropdown-menu button.danger {
-  color: #c62828;
+.dropdown-btn:active {
+  background: linear-gradient(135deg, rgba(11, 53, 80, 0.1), rgba(94, 129, 255, 0.12));
 }
 
-.dropdown-menu button.danger:hover {
-  background: #ffebee;
+.dropdown-btn.danger {
+  color: #d32f2f;
+}
+
+.dropdown-btn.danger:hover {
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.08), rgba(211, 47, 47, 0.12));
+  color: #b71c1c;
 }
 
 .dropdown-dot {

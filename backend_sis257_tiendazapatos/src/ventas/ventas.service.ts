@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  ForbiddenException,
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -510,6 +511,33 @@ export class VentasService {
 
     const guardado = await this.ventaRepository.save(venta);
     console.log('Estado de venta actualizado:', guardado.estado);
+    return this.obtenerVentaPorId(guardado.id);
+  }
+
+  async marcarVentaEntregada(id: number, idUsuario: number): Promise<Venta> {
+    const venta = await this.ventaRepository.findOne({
+      where: { id },
+      relations: ['cliente', 'ventadetalles', 'ventadetalles.producto'],
+    });
+
+    if (!venta) {
+      throw new NotFoundException(`La venta con ID ${id} no fue encontrada`);
+    }
+
+    if (!venta.cliente || venta.cliente.id !== idUsuario) {
+      throw new ForbiddenException('No tienes permiso para marcar este pedido como recibido');
+    }
+
+    if (venta.estado !== 'enviado') {
+      throw new BadRequestException('Solo se puede marcar como recibido un pedido que está en estado "enviado".');
+    }
+
+    venta.estado = 'entregado';
+    if (!venta.fechaEntrega) {
+      venta.fechaEntrega = new Date();
+    }
+
+    const guardado = await this.ventaRepository.save(venta);
     return this.obtenerVentaPorId(guardado.id);
   }
 }

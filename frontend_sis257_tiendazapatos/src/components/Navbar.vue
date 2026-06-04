@@ -7,7 +7,7 @@
     <div class="container">
       <router-link to="/" class="navbar-brand d-inline-flex">
         <img class="d-inline-block" src="/assets/img/logo.png" alt="logo" />
-        <span class="text-1000 fs-0 fw-bold ms-2">Tienda Ropa</span>
+        <span class="text-1000 fs-0 fw-bold ms-2">Tienda de Zapatos</span>
       </router-link>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
