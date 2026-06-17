@@ -255,7 +255,9 @@ onUnmounted(() => {
       <table class="data-table">
         <thead>
           <tr>
+
             <!-- OBSERVACIÓN  No confundir ID con numeración -->
+
             <th>ID Venta</th>
             <th>Cliente</th>
             <th>Fecha</th>
@@ -416,6 +418,7 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
+          <!-- OBSERVACIÓN  botones de cancelar y cambiar estado del modal -->
 
         <div class="modal-footer">
           <button type="button" class="btn-secondary" @click="cerrarModalCambiarEstado">Cancelar</button>
@@ -432,6 +435,74 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+
+ /* OBSERVACION ESTILO Y COLORES DEL LOS BOTONES MODAL */
+
+.btn-primary {
+  background: linear-gradient(135deg, #5d92ff 0%, #3f6cef 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #3f6cef 0%, #2e57da 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(63, 108, 255, 0.25);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.95);
+  color: #0f2144;
+  border: 1px solid rgba(94,129,255,0.28);
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(94,129,255,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(94,129,255,0.15);
+}
+
+/* OBSERVACION ESTILO Y COLORES DEL LOS BOTON X */
+
+.modal-close {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eef5ff, #dbe9ff);
+  color: #1d3a6f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(93, 146, 255, 0.12);
+}
+
+.modal-close:hover {
+  background: linear-gradient(135deg, #5d92ff, #3f6cef);
+  color: white;
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: 0 10px 24px rgba(63, 108, 255, 0.25);
+}
+
+.modal-close:active {
+  transform: scale(0.95);
+}
+
+
 .list-container {
   background: linear-gradient(180deg, rgba(235, 246, 255, 0.98), rgba(221, 236, 255, 0.9));
   min-height: calc(100vh - 140px);
