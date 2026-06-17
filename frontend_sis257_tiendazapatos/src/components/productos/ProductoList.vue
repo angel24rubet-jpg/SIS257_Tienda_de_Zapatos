@@ -7,6 +7,13 @@ import ProductoSave from './ProductoSave.vue'
 const productos = ref<Producto[]>([])
 const showModal = ref(false)
 const productoSeleccionado = ref<Producto | undefined>(undefined)
+
+  // Controla la visualización del modal de detalle del producto
+const showViewModal = ref(false)
+
+// Almacena el producto seleccionado para mostrar su información completa
+const productoDetalle = ref<Producto | null>(null)
+
 const busqueda = ref('')
 const imagenHover = ref<{ src: string; nombre: string } | null>(null)
 
@@ -52,6 +59,18 @@ const abrirModalCrear = () => {
 const abrirModalEditar = (producto: Producto) => {
   productoSeleccionado.value = producto
   showModal.value = true
+}
+
+// Abre el modal de detalle y carga el producto seleccionado
+const abrirDetalleProducto = (producto: Producto) => {
+  productoDetalle.value = producto
+  showViewModal.value = true
+}
+
+// Cierra el modal de detalle y limpia el producto seleccionado
+const cerrarDetalleProducto = () => {
+  showViewModal.value = false
+  productoDetalle.value = null
 }
 
 const cerrarModal = () => {
@@ -266,6 +285,20 @@ const cerrarImagenGrande = () => {
               <span v-else class="no-data">Sin colores</span>
             </td>
             <td class="actions-cell">
+
+                <!-- BOTON PARA VISUALIZAR INFORMACION COMPLETA DE PRODUCTO -->
+              <button
+                class="btn-icon btn-view"
+                @click="abrirDetalleProducto(producto)"
+                title="Ver detalle"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+
               <button class="btn-icon btn-edit" @click="abrirModalEditar(producto)" title="Editar">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -320,6 +353,88 @@ const cerrarImagenGrande = () => {
       @close="cerrarModal"
       @saved="onProductoGuardado"
     />
+
+    <!-- Modal de detalle del producto DE VER -->
+<div
+  v-if="showViewModal && productoDetalle"
+  class="modal-overlay"
+  @click="cerrarDetalleProducto"
+>
+  <div class="modal-container" @click.stop>
+
+    <div class="modal-header">
+      <h2>Detalle del Producto</h2>
+
+      <button
+        class="modal-close"
+        @click="cerrarDetalleProducto"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <img
+        :src="productoDetalle.imagenes"
+        :alt="productoDetalle.nombre"
+        class="detalle-imagen"
+      />
+
+      <div class="detalle-info">
+        <p><strong>Nombre:</strong> {{ productoDetalle.nombre }}</p>
+
+        <p><strong>Categoría:</strong>
+          {{ productoDetalle.categoria?.nombre }}
+        </p>
+
+        <p><strong>Género:</strong>
+          {{ productoDetalle.genero }}
+        </p>
+
+        <p><strong>Precio:</strong>
+          Bs {{ Number(productoDetalle.precio).toFixed(2) }}
+        </p>
+
+        <p><strong>Stock:</strong>
+          {{ productoDetalle.stock }}
+        </p>
+          <!-- TALLAS DE VER -->
+         <div>
+            <strong>Tallas:</strong>
+
+            <div class="detalle-tallas">
+              <span
+                v-for="talla in productoDetalle.tallas"
+                :key="talla"
+                class="talla-chip"
+              >
+                {{ talla }}
+              </span>
+            </div>
+          </div>
+
+          <!-- COLORES DE VER -->
+          <div>
+            <strong>Colores:</strong>
+
+            <div class="detalle-colores">
+              <span
+                v-for="color in productoDetalle.colores"
+                :key="color.id"
+                class="detalle-color"
+              >
+                {{ color.nombre }}
+              </span>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
     <!-- Modal de Imagen -->
     <Teleport to="body">
@@ -943,4 +1058,96 @@ const cerrarImagenGrande = () => {
 .image-modal-leave-to .image-modal-content {
   transform: scale(0.9);
 }
+
+/* MODAL PARA VER DETALLE DEL PRODUCTO DE VER */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 26, 56, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 700px;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #13315f;
+}
+
+.modal-close {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #eef4ff;
+  color: #13315f;
+  font-size: 1.1rem;
+}
+
+.modal-close:hover {
+  background: #dbe8ff;
+}
+
+.modal-body {
+  padding: 28px;
+}
+
+.detalle-imagen {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.detalle-info p {
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+.detalle-tallas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.detalle-colores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.detalle-color {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #eef4ff;
+  color: #13315f;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(94, 129, 255, 0.2);
+}
+
+
 </style>
