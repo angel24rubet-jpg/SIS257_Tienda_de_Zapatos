@@ -161,14 +161,18 @@ const submit = async () => {
 
             <div class="form-grid">
               <div class="form-group">
-                <label class="form-label">Cédula / CI</label>
+
+                <!-- OBSERVACIÓN CI/NIT obligatorio -->
+
+                <label class="form-label">Cédula / CI *</label>
                 <input
                   v-model="form.cedula"
                   type="text"
                   class="form-input"
                   placeholder="Número de CI"
                   maxlength="15"
-                />
+                  required
+              />
               </div>
               <div class="form-group">
                 <label class="form-label">Género</label>

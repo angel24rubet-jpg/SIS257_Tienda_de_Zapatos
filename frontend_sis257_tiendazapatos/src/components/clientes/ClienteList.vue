@@ -109,6 +109,8 @@ onMounted(() => cargarClientes())
             <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <!-- OBSERVACIÓN Mostrar CI/NIT en listado de clientes -->
+            <th>Cédula / CI</th>
             <th>Teléfono</th>
             <th>Dirección</th>
             <th class="text-end">Acciones</th>
@@ -128,6 +130,8 @@ onMounted(() => cargarClientes())
               </div>
             </td>
             <td>{{ cliente.apellido || '-' }}</td>
+            <!-- OBSERVACIÓN Mostrar CI/NIT en listado de clientes -->
+            <td>{{ cliente.cedula || '-' }}</td>
             <td>
               <span v-if="cliente.telefono" class="info-badge phone-badge">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

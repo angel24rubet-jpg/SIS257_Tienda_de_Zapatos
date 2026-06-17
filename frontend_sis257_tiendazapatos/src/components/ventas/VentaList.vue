@@ -255,7 +255,8 @@ onUnmounted(() => {
       <table class="data-table">
         <thead>
           <tr>
-            <th>ID</th>
+            <!-- OBSERVACIÓN  No confundir ID con numeración -->
+            <th>ID Venta</th>
             <th>Cliente</th>
             <th>Fecha</th>
             <th>Método de Pago</th>
@@ -391,7 +392,9 @@ onUnmounted(() => {
         <div class="modal-header">
           <div class="header-content">
             <h2 class="modal-title">Cambiar Estado de Envío</h2>
-            <p class="order-info">Venta #{{ ventaParaCambiarEstado.id }} - {{ getEstadoLabel(ventaParaCambiarEstado.estado) }}</p>
+
+            <!-- OBSERVACIÓN  Mostrar que es ID venta -->
+            <p class="order-info">ID Venta: #{{ ventaParaCambiarEstado.id }} - {{ getEstadoLabel(ventaParaCambiarEstado.estado) }}</p>
           </div>
           <button @click="cerrarModalCambiarEstado" class="modal-close" type="button">✕</button>
         </div>
