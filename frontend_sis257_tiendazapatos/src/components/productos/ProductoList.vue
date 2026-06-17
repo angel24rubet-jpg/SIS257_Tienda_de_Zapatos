@@ -415,24 +415,30 @@ const cerrarImagenGrande = () => {
           </div>
 
           <!-- COLORES DE VER -->
-          <div>
+          
+          <div class="detalle-seccion">
             <strong>Colores:</strong>
 
             <div class="detalle-colores">
-              <span
+
+              <div
                 v-for="color in productoDetalle.colores"
                 :key="color.id"
                 class="detalle-color"
               >
+                <span
+                  class="color-circle"
+                  :style="{ backgroundColor: color.codigoHex }"
+                ></span>
+
                 {{ color.nombre }}
-              </span>
+
+              </div>
+
             </div>
           </div>
-
       </div>
-
     </div>
-
   </div>
 </div>
 
@@ -1064,12 +1070,12 @@ const cerrarImagenGrande = () => {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 26, 56, 0.55);
+  background: rgba(252, 253, 253, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 .modal-container {
@@ -1112,19 +1118,50 @@ const cerrarImagenGrande = () => {
 .modal-body {
   padding: 28px;
 }
+ /* detalles de la imagen */
 
 .detalle-imagen {
   width: 100%;
-  max-height: 320px;
+  max-height: 310px;
   object-fit: contain;
-  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(249, 250, 250, 0.95),
+    rgba(248, 247, 247, 0.95)
+  );
+
+  border: 1px solid rgba(2, 4, 14, 0.15);
+
+  padding: 20px;
+
+  border-radius: 18px;
+
+  margin-bottom: 20px;
+}
+
+.detalle-info {
+  background: rgba(219, 233, 255, 0.85);
+
+  border: 1px solid rgba(94, 129, 255, 0.18);
+
+  border-radius: 18px;
+
+  padding: 20px;
+
   margin-bottom: 20px;
 }
 
 .detalle-info p {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-size: 0.95rem;
+  color: #2b3f5f;
 }
+
+.detalle-info strong {
+  color: #13315f;
+}
+
 .detalle-tallas {
   display: flex;
   flex-wrap: wrap;
@@ -1140,13 +1177,62 @@ const cerrarImagenGrande = () => {
 }
 
 .detalle-color {
-  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+
   border-radius: 20px;
+
   background: #eef4ff;
+
   color: #13315f;
+
   font-size: 0.85rem;
+
   font-weight: 600;
+
   border: 1px solid rgba(94, 129, 255, 0.2);
+}
+
+/* Indicador de color en forma de círculo */
+
+.color-circle {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid #ffffff;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  flex-shrink: 0;
+}
+
+.detalle-seccion {
+  margin-top: 18px;
+}
+
+.detalle-seccion strong {
+  display: block;
+  margin-bottom: 12px;
+  color: #13315f;
+}
+
+.detalle-colores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  padding: 12px;
+
+  background: rgba(233, 244, 255, 0.55);
+
+  border: 1px solid rgba(94, 129, 255, 0.15);
+
+  border-radius: 14px;
 }
 
 
